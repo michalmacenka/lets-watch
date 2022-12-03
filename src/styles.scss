@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	html {
+		@apply text-base;
+	}
+	@screen 2xl {
+		html {
+			@apply text-lg;
+		}
+	}
+	h1,
+	h2 {
+		@apply font-title;
+	}
+}
