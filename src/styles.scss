@@ -17,4 +17,8 @@
 	h2 {
 		@apply font-title;
 	}
+	input:focus,
+	textarea:focus {
+		@apply outline-none;
+	}
 }

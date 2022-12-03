@@ -3,4 +3,6 @@
 	import 'remixicon/fonts/remixicon.css';
 </script>
 
-<slot />
+<div class="font-body text-white">
+	<slot />
+</div>
