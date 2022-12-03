@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"remixicon": "^2.5.0",
 		"sass": "^1.56.1"
 	}
 }
