@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"axios": "^1.2.0",
 		"remixicon": "^2.5.0",
 		"sass": "^1.56.1",
 		"svelte-typewriter": "^3.1.4"
