@@ -5,12 +5,20 @@
 	import { popularVideos } from '$core/store/writable';
 	import PopularVideo from '$lib/components/PopularVideo.svelte';
 	import shuffleArray from '$core/helpers/shuffleArray';
+	// @ts-ignore
+	import gsap, { Expo } from 'gsap/dist/gsap';
+	// @ts-ignore
+	import ScrollTrigger from 'gsap/dist/ScrollTrigger.js';
+	import { onMount } from 'svelte';
+	import animationPopularVideos from '$core/animations/popularVideos';
+
+	onMount(animationPopularVideos);
 
 	export let data: PageData;
 	$popularVideos = shuffleArray(data.popularVideos);
 </script>
 
-<main class="flex flex-col items-center p-16 w-full gap-5 ">
+<main class="flex flex-col items-center sm:p-16 p-6 w-full gap-5 ">
 	<h1 class="uppercase text-2xl font-bold tracking-widest ">
 		Let's <span class="text-main ">Watch!</span>
 	</h1>
@@ -19,9 +27,15 @@
 	<section class="w-full max-w-6xl mt-16">
 		<div class="w-full columns   ">
 			{#each $popularVideos as video}
-				<PopularVideo {video} />
+				{#if video.rating}
+					<PopularVideo {video} />
+				{/if}
 			{/each}
 		</div>
+	</section>
+	<section class="flex flex-col justify-center items-center w-full min-h-screen">
+		<h1 class="text-5xl text-dark font-bold uppercase tracking-widest ">Couldn't you've chosen?</h1>
+		<h2 class="text-main mt-2 ">Try to search anything you want!</h2>
 	</section>
 </main>
 

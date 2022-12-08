@@ -17,7 +17,7 @@
 	const typeBgColor = $videoType.find((o) => o.type.toLowerCase() === video.type)?.bg;
 </script>
 
-<div class="w-full grid grid-cols-2 items-center ">
+<div class="w-full grid grid-cols-2 items-center popularVideo">
 	<Lazy height={300} class="relative col-span-2 ">
 		<span
 			class="absolute {typeBgColor}  bg-opacity-50  backdrop-blur  capitalize rounded text-sm py-1 px-3 m-2  "

@@ -30,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"axios": "^1.2.0",
+		"gsap": "^3.11.3",
 		"remixicon": "^2.5.0",
 		"sass": "^1.56.1",
 		"svelte-lazy": "^1.1.0",
