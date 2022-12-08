@@ -2,6 +2,7 @@
 	import Lazy from 'svelte-lazy';
 
 	import type * as SV from '$core/schemas/popularVideos';
+	import { videoType } from '$core/store/readable';
 
 	export let video: SV.Video = {
 		title: '',
@@ -11,9 +12,35 @@
 		year: 0,
 		rating: 0
 	};
+
+	video.type = video.type.replace('_', ' ').toLowerCase();
+	const typeBgColor = $videoType.find((o) => o.type.toLowerCase() === video.type)?.bg;
 </script>
 
-<Lazy height={300}>
-	<img src={video.urlPoster} alt="{video.title} poster" class="object-cover w-36  h-60" />
-	<h1>{video.title}</h1>
-</Lazy>
+<div class="w-full grid grid-cols-2 items-center ">
+	<Lazy height={300} class="relative col-span-2 ">
+		<span
+			class="absolute {typeBgColor}  bg-opacity-50  backdrop-blur  capitalize rounded text-sm py-1 px-3 m-2  "
+		>
+			{video.type}
+		</span>
+		<img
+			src={video.urlPoster}
+			alt="{video.title} poster"
+			class=" w-full rounded-md object-cover h-72   "
+		/>
+	</Lazy>
+
+	<h3 class=" mt-3 text-white font-semibold col-span-2 ">{video.title}</h3>
+	<p class="text-middle text-sm ">{video.year}</p>
+	<div class="flex gap-1 justify-self-end  ">
+		<i class="ri-star-s-fill text-main star backdrop-filter-[none]   -mt-1" />
+		<p class="text-light text-sm ">{video.rating}</p>
+	</div>
+</div>
+
+<style>
+	.star {
+		filter: drop-shadow(0 0 4px rgb(252 197 55 / 0.5));
+	}
+</style>

@@ -9,18 +9,25 @@
 	$popularVideos = data.popularVideos;
 </script>
 
-<main class="flex flex-col items-center p-16 w-full gap-5">
+<main class="flex flex-col items-center p-16 w-full gap-5 ">
 	<h1 class="uppercase text-2xl font-bold tracking-widest ">
 		Let's <span class="text-main ">Watch!</span>
 	</h1>
 	<Searchbar />
 
-	<section>
-		<!-- <h1 class="text-2xl">Popular Videos</h1> -->
-		<div class="w-full max-w-6xl grid grid-cols-5 gap-5">
+	<section class="w-full max-w-6xl ">
+		<div class="w-full columns   ">
 			{#each $popularVideos as video}
 				<PopularVideo {video} />
 			{/each}
 		</div>
 	</section>
 </main>
+
+<style>
+	.columns {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		grid-gap: 3em;
+	}
+</style>

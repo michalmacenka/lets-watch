@@ -15,6 +15,9 @@ module.exports = {
 				middle: '#4A5056',
 				light: '#D0D4DA',
 				main: '#FCC537',
+				'blue-main': '#2555FA',
+				'red-main': '#FA3265',
+				'purple-main': '#9A23AD'
 			}
 		}
 	},
