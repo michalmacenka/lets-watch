@@ -1,12 +1,14 @@
 <script lang="ts">
 	import Typewriter from 'svelte-typewriter';
 
+	import { popularVideos } from '$core/store/writable';
+
 	let input: HTMLElement;
 	let hidePlaceholder = false;
 
 	let term: string = '';
 
-	const placeholders = ['Breaking Bad', 'HIMYM', 'Free Guy'];
+	const placeholders = $popularVideos.map((video) => video.title);
 </script>
 
 <form class="w-full max-w-lg">
@@ -18,7 +20,7 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<p
 				class:opacity-0={hidePlaceholder || term.length > 0}
-				class="grow cursor-text translate-y-[0.1rem] flex items-center gap-1"
+				class="grow cursor-text translate-y-[0.1rem] flex items-center gap-1  cutText"
 				on:click={() => input.focus()}
 			>
 				Let's watch

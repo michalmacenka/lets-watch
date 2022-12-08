@@ -21,4 +21,8 @@
 	textarea:focus {
 		@apply outline-none;
 	}
+
+	.cutText {
+		@apply overflow-hidden inline-block text-ellipsis whitespace-nowrap;
+	}
 }
