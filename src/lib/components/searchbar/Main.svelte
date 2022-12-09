@@ -2,9 +2,10 @@
 	import Typewriter from 'svelte-typewriter';
 
 	import { popularVideos } from '$core/store/writable';
+	import Results from './Results.svelte';
 
 	let input: HTMLElement;
-	let hidePlaceholder = false;
+	let inSearch = false;
 
 	let term: string = '';
 
@@ -19,7 +20,7 @@
 			</button>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<p
-				class:opacity-0={hidePlaceholder || term.length > 0}
+				class:opacity-0={inSearch || term.length > 0}
 				class="grow cursor-text translate-y-[0.1rem] flex items-center gap-1  cutText"
 				on:click={() => input.focus()}
 			>
@@ -45,11 +46,13 @@
 			</button>
 		</div>
 		<input
-			on:focusout={() => (hidePlaceholder = false)}
+			on:focusout={() => (inSearch = false)}
 			bind:this={input}
 			bind:value={term}
 			type="text"
 			class="pt-3.5  pb-3 px-14 text-white bg-dark rounded-lg w-full select-none"
 		/>
 	</div>
+
+	<Results />
 </form>

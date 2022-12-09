@@ -25,4 +25,9 @@
 	.cutText {
 		@apply overflow-hidden inline-block text-ellipsis whitespace-nowrap;
 	}
+	.dynamicColumns {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		grid-gap: 3em;
+	}
 }

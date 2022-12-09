@@ -14,7 +14,8 @@
 	};
 
 	video.type = video.type.replace('_', ' ').toLowerCase();
-	const typeBgColor = $videoType.find((o) => o.type.toLowerCase() === video.type)?.bg;
+	const typeBgColor =
+		$videoType.find((o) => o.type.toLowerCase() === video.type)?.bg || 'bg-purple-main';
 </script>
 
 <div class="w-full grid grid-cols-2 items-center popularVideo">
