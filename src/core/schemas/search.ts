@@ -8,7 +8,7 @@ export interface VideoResult {
 	l: string;
 	y?: number;
 	s: string;
-	qid?: string;
+	qid: string;
 	rank?: number;
 	q?: string;
 	yr?: string;
