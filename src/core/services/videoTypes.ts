@@ -1,9 +1,18 @@
-import type { VideoResult } from '$core/schemas/search';
 import { get } from 'svelte/store';
-import { videoType } from '$core/store/readable';
+import { allowedTypes, videoType } from '$core/store/readable';
+import type { VideoResult, VideoType } from '$core/schemas/search';
 
-const typeBgColor = (videoResult: VideoResult) => {
-	videoResult.q = (videoResult.q || '').toLowerCase();
-	return get(videoType).find((o) => o.type.toLowerCase() === videoResult.q)?.bg;
+const getType = (type: string): VideoType => {
+	type = (type || '').toLowerCase();
+	let finded = get(videoType).find((o) => o.q?.toLowerCase() === type);
+	return finded || { title: '', q: '', bg: '' };
 };
-export { typeBgColor };
+
+const filteredByTypes = (results: VideoResult[]): VideoResult[] => {
+	let filtred = results.filter(
+		({ qid, y, i }) => get(allowedTypes).includes(qid.toLowerCase()) && y && qid && i
+	);
+	return filtred;
+};
+
+export { getType, filteredByTypes };

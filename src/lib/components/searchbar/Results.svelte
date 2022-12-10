@@ -1,13 +1,11 @@
 <script lang="ts">
 	import Result from './Result.svelte';
 	import type { VideoResult } from '$core/schemas/search';
-	import { allowedTypes } from '$core/store/readable';
+	import { filteredByTypes } from '$core/services/videoTypes';
 
 	export let results: VideoResult[];
 
-	const filteredResults = results.filter(
-		({ qid, y, i }) => $allowedTypes.includes((qid || '').toLowerCase()) && y && qid && i
-	);
+	const filteredResults = filteredByTypes(results);
 
 	console.log(results);
 	console.log(filteredResults);

@@ -2,28 +2,20 @@
 	import Lazy from 'svelte-lazy';
 
 	import type * as SV from '$core/schemas/popularVideos';
-	import { videoType } from '$core/store/readable';
+	import { getType } from '$core/services/videoTypes';
 
-	export let video: SV.Video = {
-		title: '',
-		idIMDB: '',
-		urlPoster: '',
-		type: '',
-		year: 0,
-		rating: 0
-	};
+	export let video: SV.Video;
 
-	video.type = video.type.replace('_', ' ').toLowerCase();
-	const typeBgColor =
-		$videoType.find((o) => o.type.toLowerCase() === video.type)?.bg || 'bg-purple-main';
+	video.type = video.type.replace(/[-_]/g, ' ').toLowerCase();
+	const type = getType(video.type.replaceAll(' ', ''));
 </script>
 
 <div class="w-full grid grid-cols-2 items-center popularVideo">
 	<Lazy height={300} class="relative col-span-2 ">
 		<span
-			class="absolute {typeBgColor}  bg-opacity-50  backdrop-blur  capitalize rounded text-sm py-1 px-3 m-2  "
+			class="absolute {type.bg}  bg-opacity-50  backdrop-blur  capitalize rounded text-sm py-1 px-3 m-2  "
 		>
-			{video.type}
+			{type.title}
 		</span>
 		<img
 			src={video.urlPoster}

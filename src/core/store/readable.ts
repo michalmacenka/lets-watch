@@ -1,16 +1,15 @@
 import { readable, get } from 'svelte/store';
 import type { Readable } from 'svelte/store';
+import type { VideoType } from '$core/schemas/search';
 
-const videoType: Readable<{ type: string; bg: string }[]> = readable([
-	{ type: 'TV Series', bg: 'bg-red-main' },
-	{ type: 'TV Episode', bg: 'bg-purple-main' },
-	{ type: 'TV Movie', bg: 'bg-blue-main' },
-	{ type: 'TV Special', bg: 'bg-purple-main' },
-	{ type: 'TV Mini Series', bg: 'bg-red-main' },
-	{ type: 'Tv Mini-Series', bg: 'bg-red-main' },
-	{ type: 'Movie', bg: 'bg-blue-main' }
+const videoType: Readable<VideoType[]> = readable([
+	{ title: 'Tv Series', q: 'tvseries', bg: 'bg-red-main' },
+	{ title: 'Movie', q: 'movie', bg: 'bg-blue-main' },
+	{ title: 'Tv Movie', q: 'tvmovie', bg: 'bg-purple-main' },
+	{ title: 'Special', q: 'tvspecial', bg: 'bg-purple-main' },
+	{ title: 'Tv Mini Series', q: 'tvminiseries', bg: 'bg-red-main' }
 ]);
 
-const allowedTypes: Readable<string[]> = readable(['tvseries', 'movie', 'tvminiseries']);
+const allowedTypes: Readable<string[]> = readable(get(videoType).map(({ q }) => q));
 
 export { videoType, allowedTypes };

@@ -13,3 +13,9 @@ export interface VideoResult {
 	q?: string;
 	yr?: string;
 }
+
+export interface VideoType {
+	title: string;
+	q: string;
+	bg: string;
+}

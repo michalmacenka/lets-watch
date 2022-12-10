@@ -7,6 +7,7 @@
 	import PopularVideo from '$lib/components/PopularVideo.svelte';
 	import shuffleArray from '$core/helpers/shuffleArray';
 	import animationPopularVideos from '$core/animations/popularVideos';
+	import { allowedTypes } from '$core/store/readable';
 
 	onMount(animationPopularVideos);
 
@@ -23,7 +24,7 @@
 	<section class="w-full max-w-6xl mt-16">
 		<div class="w-full dynamicColumns   ">
 			{#each $popularVideos as video}
-				{#if video.rating}
+				{#if video.rating && $allowedTypes.includes(video.type.replace(/[-_ ]/g, '').toLowerCase())}
 					<PopularVideo {video} />
 				{/if}
 			{/each}
