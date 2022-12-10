@@ -14,6 +14,7 @@
 
 	let input: HTMLElement;
 	let inSearch = false;
+	let searching = false;
 
 	let term: string = '';
 	let results: VideoResult[] = [];
@@ -21,15 +22,17 @@
 	const suggestions = async () => {
 		results = [];
 		if (term === '') return;
+		searching = true;
 		const { data } = await axios({
 			url: '/api/suggestions/' + term
 		});
+		searching = false;
 
 		results = data.data;
 	};
 	$: results = filteredByTypes(results);
 
-	const delay = initDelay(250);
+	const delay = initDelay(500);
 </script>
 
 {#if inSearch}
@@ -46,7 +49,7 @@
 			class="absolute flex px-5 text-middle gap-5 items-center  -translate-y-[0.05rem] "
 		>
 			<button type="submit" class="flex items-center">
-				<i class="ri-search-line " />
+				<i class="{searching ? 'ri-loader-4-line animate-spin' : 'ri-search-line'} " />
 			</button>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			{#if term.length === 0}
@@ -106,12 +109,13 @@
 				class="pt-6 pb-2.5 -mt-2 text-white bg-dark rounded-b-lg w-full relative"
 			>
 				<div class="w-[calc(100%-2.5rem)] mx-5 bg-middle/30 h-px absolute top-2" />
-				<ul class="mt-2 flex flex-col   ">
-					{#each results.slice(0, 4) as videoResult}
+				<ul class="mt-2 flex flex-col   max-h-80  overflow-auto scrollbar">
+					{#each results as videoResult}
 						<Result {videoResult} />
 					{/each}
 				</ul>
 			</div>
+			<p class="text-xs text-light/70 m-1 ">*Not all suggestions can be played</p>
 		</div>
 	{/if}
 </form>

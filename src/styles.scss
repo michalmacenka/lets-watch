@@ -30,4 +30,19 @@
 		grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 		grid-gap: 3em;
 	}
+	/* Custom Scrollbar */
+
+	.scrollbar::-webkit-scrollbar-track {
+		@apply rounded-full bg-transparent;
+	}
+
+	.scrollbar::-webkit-scrollbar {
+		@apply bg-transparent w-[6px];
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb {
+		@apply rounded-full bg-middle;
+	}
+
+	/* ----------- */
 }
