@@ -16,7 +16,7 @@
 </script>
 
 <main class="flex flex-col items-center sm:p-16 p-6 w-full gap-5 ">
-	<h1 class="uppercase text-2xl font-bold tracking-widest ">
+	<h1 class="uppercase text-2xl font-bold tracking-widest z-20">
 		Let's <span class="text-main ">Watch!</span>
 	</h1>
 	<Searchbar />

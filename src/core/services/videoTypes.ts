@@ -10,7 +10,7 @@ const getType = (type: string): VideoType => {
 
 const filteredByTypes = (results: VideoResult[]): VideoResult[] => {
 	let filtred = results.filter(
-		({ qid, y, i }) => get(allowedTypes).includes(qid.toLowerCase()) && y && qid && i
+		({ qid, y, i }) => get(allowedTypes).includes((qid || '').toLowerCase()) && y && qid && i
 	);
 	return filtred;
 };
