@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { VideoResult } from '$core/schemas/search';
+	import type * as SS from '$core/schemas/search';
 	import { getType } from '$core/services/videoTypes';
 
-	export let videoResult: VideoResult;
+	export let videoResult: SS.VideoResult;
 	const type = getType(videoResult.qid.toLowerCase());
 </script>
 

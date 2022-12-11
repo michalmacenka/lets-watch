@@ -1,12 +1,11 @@
 import axios from 'axios';
+import type * as SI from '$core/schemas/videoInformations';
 
-import type * as SP from '$core/schemas/popularVideos';
-
-export default async (): Promise<SP.Video[]> => {
+export default async (idIMDB: string): Promise<SI.VideoInfo> => {
 	try {
 		const { data } = await axios({
 			baseURL: import.meta.env.VITE_LETSWATCH_API_URL,
-			url: '/api/popular'
+			url: '/api/informations/' + idIMDB
 		});
 
 		return data.data;

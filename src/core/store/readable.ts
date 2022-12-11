@@ -1,8 +1,8 @@
 import { readable, get } from 'svelte/store';
 import type { Readable } from 'svelte/store';
-import type { VideoType } from '$core/schemas/search';
+import type * as SS from '$core/schemas/search';
 
-const videoType: Readable<VideoType[]> = readable([
+const videoType: Readable<SS.VideoType[]> = readable([
 	{ title: 'Tv Series', q: 'tvseries', bg: 'bg-red-main' },
 	{ title: 'Movie', q: 'movie', bg: 'bg-blue-main' },
 	{ title: 'Tv Movie', q: 'tvmovie', bg: 'bg-purple-main' },

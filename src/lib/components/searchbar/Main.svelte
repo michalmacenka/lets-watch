@@ -4,9 +4,8 @@
 
 	import { popularVideos } from '$core/store/writable';
 	import { initDelay } from '$core/helpers/fnDelay';
-	import type { VideoResult } from '$core/schemas/search';
+	import type * as SS from '$core/schemas/search';
 	import Result from './Result.svelte';
-	import type { VideoResult } from '$core/schemas/search';
 	import { filteredByTypes } from '$core/services/videoTypes';
 	import { fade, blur, fly, slide, scale } from 'svelte/transition';
 
@@ -17,7 +16,7 @@
 	let searching = false;
 
 	let term: string = '';
-	let results: VideoResult[] = [];
+	let results: SS.VideoResult[] = [];
 
 	const suggestions = async () => {
 		results = [];

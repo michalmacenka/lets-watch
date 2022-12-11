@@ -2,15 +2,15 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 import getPopularVideos from '$core/services/popularVideos';
-import type * as SV from '$core/schemas/popularVideos';
+import type * as SP from '$core/schemas/popularVideos';
 
 type OutputProps = {
-	popularVideos: SV.Video[];
+	popularVideos: SP.Video[];
 };
 
 export const load: PageServerLoad<OutputProps> = async () => {
 	try {
-		const popularVideos: SV.Video[] = await getPopularVideos();
+		const popularVideos: SP.Video[] = await getPopularVideos();
 		return { popularVideos };
 	} catch (err) {
 		throw error(404, 'Not found');
