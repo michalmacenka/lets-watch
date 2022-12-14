@@ -10,7 +10,7 @@ type OutputProps = {
 
 export const load: PageServerLoad<OutputProps> = async () => {
 	try {
-		const idIMDB = 'tt6264654'; //! For testing
+		const idIMDB = 'tt4574334'; //! For testing
 		const videoInfo: SI.VideoInfo = await getVideoInformatios(idIMDB);
 		return { videoInfo };
 	} catch (err) {

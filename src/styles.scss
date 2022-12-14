@@ -30,6 +30,10 @@
 		grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 		grid-gap: 3em;
 	}
+	.star {
+		filter: drop-shadow(0 0 4px rgb(252 197 55 / 0.5));
+	}
+
 	/* Custom Scrollbar */
 
 	.scrollbar::-webkit-scrollbar-track {

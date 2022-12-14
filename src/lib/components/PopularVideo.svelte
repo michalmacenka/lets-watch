@@ -28,12 +28,6 @@
 	<p class="text-middle text-sm ">{video.year}</p>
 	<div class="flex gap-1 justify-self-end  ">
 		<i class="ri-star-s-fill text-main star backdrop-filter-[none]   -mt-1" />
-		<p class="text-light text-sm ">{video.rating}</p>
+		<p class="text-light text-sm ">{video.rating.toFixed(1)}</p>
 	</div>
 </div>
-
-<style>
-	.star {
-		filter: drop-shadow(0 0 4px rgb(252 197 55 / 0.5));
-	}
-</style>
