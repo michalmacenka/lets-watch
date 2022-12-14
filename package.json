@@ -30,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"axios": "^1.2.0",
+		"fast-average-color": "^9.1.1",
 		"gsap": "^3.11.3",
 		"remixicon": "^2.5.0",
 		"sass": "^1.56.1",

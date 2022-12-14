@@ -23,6 +23,7 @@
 		if (term === '') return;
 		searching = true;
 		const { data } = await axios({
+			baseURL: import.meta.env.VITE_LETSWATCH_API_URL,
 			url: '/api/suggestions/' + term
 		});
 		searching = false;
@@ -104,7 +105,7 @@
 	{#if inSearch && results.length}
 		<div class="absolute w-full z-20">
 			<div
-				transition:slide={{ y: -50, duration: 200 }}
+				transition:slide={{ duration: 200 }}
 				class="pt-6 pb-2.5 -mt-2 text-white bg-dark rounded-b-lg w-full relative"
 			>
 				<div class="w-[calc(100%-2.5rem)] mx-5 bg-middle/30 h-px absolute top-2" />

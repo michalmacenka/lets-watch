@@ -20,6 +20,7 @@ export interface VideoInfo {
 	urlPoster: string;
 	type: string;
 	urlIMDB: string;
+	urlBg: string;
 	year: number;
 	endYear?: number;
 }
