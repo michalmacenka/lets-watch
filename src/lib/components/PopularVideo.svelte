@@ -10,7 +10,7 @@
 	const type = getType(video.type.replaceAll(' ', ''));
 </script>
 
-<div class="w-full grid grid-cols-2 items-center popularVideo">
+<div class="w-full grid grid-cols-2 items-start popularVideo">
 	<Lazy height={300} class="relative col-span-2 ">
 		<span
 			class="absolute {type.bg}  bg-opacity-50  backdrop-blur  capitalize rounded text-sm py-1 px-3 m-2  "

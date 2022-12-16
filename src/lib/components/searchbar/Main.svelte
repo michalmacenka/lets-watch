@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Typewriter from 'svelte-typewriter';
+	import { blur, slide } from 'svelte/transition';
 	import axios from 'axios';
 
 	import { popularVideos } from '$core/store/writable';
@@ -7,7 +8,6 @@
 	import type * as SS from '$core/schemas/search';
 	import Result from './Result.svelte';
 	import { filteredByTypes } from '$core/services/videoTypes';
-	import { fade, blur, fly, slide, scale } from 'svelte/transition';
 
 	const placeholders = $popularVideos.map((video) => video.title);
 
