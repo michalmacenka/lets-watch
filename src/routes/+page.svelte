@@ -1,27 +1,16 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
 
-	import Searchbar from '$lib/components/searchbar/Main.svelte';
 	import { popularVideos } from '$core/store/writable';
 	import PopularVideo from '$lib/components/PopularVideo.svelte';
-	import shuffleArray from '$core/helpers/shuffleArray';
 	import animationPopularVideos from '$core/animations/popularVideos';
 	import { allowedTypes } from '$core/store/readable';
 
 	onMount(animationPopularVideos);
-
-	export let data: PageData;
-	$popularVideos = shuffleArray(data.popularVideos);
 </script>
 
-<main class="flex flex-col items-center sm:p-16 p-6 w-full gap-5 ">
-	<h1 class="uppercase text-2xl font-bold tracking-widest z-20">
-		Let's <span class="text-main ">Watch!</span>
-	</h1>
-	<Searchbar />
-
-	<section class="w-full max-w-6xl mt-16">
+<main class="flex flex-col items-center  gap-5 ">
+	<section class="w-full max-w-6xl ">
 		<div class="w-full dynamicColumns   ">
 			{#each $popularVideos as video}
 				{#if video.rating && $allowedTypes.includes(video.type.replace(/[-_ ]/g, '').toLowerCase())}

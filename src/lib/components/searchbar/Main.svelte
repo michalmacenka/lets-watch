@@ -39,14 +39,25 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		transition:blur={{ duration: 100 }}
-		class="fixed top-0 w-full h-screen bg-black/70 backdrop-blur-sm z-10"
+		class="fixed top-0 w-full h-screen bg-black/70 backdrop-blur-sm z-40"
 	/>
 {/if}
-<form class="w-full max-w-lg relative">
-	<div class="flex items-center w-full relative z-30">
+<div
+	class="w-full max-w-lg relative"
+	on:focusout={() => {
+		inSearch = false;
+		document.body.classList.remove('overflow-hidden');
+	}}
+	on:focusin={() => {
+		inSearch = true;
+		document.body.classList.add('overflow-hidden');
+	}}
+>
+	<div class="flex items-center w-full relative z-50">
 		<div
 			class:w-full={term.length === 0}
-			class="absolute flex px-5 text-middle gap-5 items-center  -translate-y-[0.05rem] "
+			class:brightness-125={!inSearch}
+			class="absolute flex px-5 text-middle gap-5 items-center z-40  -translate-y-[0.05rem]  "
 		>
 			<button type="submit" class="flex items-center">
 				<i class="{searching ? 'ri-loader-4-line animate-spin' : 'ri-search-line'} " />
@@ -72,7 +83,7 @@
 				</p>
 			{/if}
 		</div>
-		<div class="absolute right-0 -translate-y-[0.05rem]">
+		<div class="absolute right-0 -translate-y-[0.05rem] z-40">
 			<button
 				on:click={() => {
 					term = '';
@@ -87,23 +98,17 @@
 			</button>
 		</div>
 		<input
-			on:focusout={() => {
-				inSearch = false;
-				document.body.classList.remove('overflow-hidden');
-			}}
-			on:focus={() => {
-				inSearch = true;
-				document.body.classList.add('overflow-hidden');
-			}}
 			bind:this={input}
 			bind:value={term}
 			on:input={() => delay(suggestions)}
 			type="text"
-			class="pt-3.5  pb-3 px-14 text-white bg-dark rounded-lg w-full select-none"
+			class="pt-3.5  pb-3 px-14 text-white {inSearch
+				? 'bg-dark'
+				: 'bg-middle/30'}  rounded-lg backdrop-blur w-full select-none"
 		/>
 	</div>
 	{#if inSearch && results.length}
-		<div class="absolute w-full z-20">
+		<div class="absolute w-full z-40">
 			<div
 				transition:slide={{ duration: 200 }}
 				class="pt-6 pb-2.5 -mt-2 text-white bg-dark rounded-b-lg w-full relative"
@@ -111,11 +116,18 @@
 				<div class="w-[calc(100%-2.5rem)] mx-5 bg-middle/30 h-px absolute top-2" />
 				<ul class="mt-2 flex flex-col   max-h-80  overflow-auto scrollbar">
 					{#each results as videoResult}
-						<Result {videoResult} />
+						<Result
+							{videoResult}
+							on:click={() => {
+								inSearch = false;
+								term = '';
+								document.body.classList.remove('overflow-hidden');
+							}}
+						/>
 					{/each}
 				</ul>
 			</div>
 			<p class="text-xs text-light/70 m-1 ">*Not all suggestions can be played</p>
 		</div>
 	{/if}
-</form>
+</div>

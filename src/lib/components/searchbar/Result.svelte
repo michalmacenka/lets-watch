@@ -8,7 +8,9 @@
 
 <li>
 	<a
-		href="#"
+		on:click
+		data-sveltekit-preload-data="tap"
+		href="/{videoResult.id}"
 		class="flex gap-2 items-start hover:bg-light/5 py-2.5 rounded-lg transition-all px-5 "
 	>
 		<img
