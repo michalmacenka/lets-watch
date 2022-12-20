@@ -9,12 +9,12 @@
 	import Informations from '$lib/components/video/Informations.svelte';
 	import Buttons from '$lib/components/video/Buttons.svelte';
 	import animationVideoInformations from '$core/animations/videoInformations';
-	import PlayType from '$lib/components/video/PlayType.svelte';
+	import Playbox from '$lib/components/video/Playbox.svelte';
 
 	export let data: PageData;
 	$: $videoInfo = data.videoInfo;
 
-	let playBox = true;
+	let playBox = false;
 
 	let img: HTMLImageElement;
 
@@ -69,14 +69,17 @@
 		{/if}
 	</div>
 
-	<div class="text-light max-w-xl w-full infoSlide">
+	<div
+		class="text-light max-w-xl w-full infoSlide sticky top-14"
+		out:fly={{ x: -30, duration: 300 }}
+	>
 		<Informations />
 		<Buttons on:click={() => (playBox = !playBox)} />
 	</div>
 	{#if playBox}
-		<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30 }}>
-			<h3 class="text-4xl font-bold text-white mb-4">Play Video</h3>
-			<PlayType />
+		<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30, duration: 300 }}>
+			<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
+			<Playbox />
 		</div>
 	{/if}
 </main>

@@ -1,6 +1,6 @@
-interface EpisodeInfo {
+export interface EpisodeInfo {
 	episode: number;
-	season: number;
+	numSeason: number;
 	idIMDB: string;
 	title: string;
 }
@@ -15,7 +15,7 @@ export interface VideoInfo {
 	description: string;
 	duration: number;
 	genres: String[];
-	seasons?: SeasonInfo[];
+	seasons: SeasonInfo[];
 	rating: number;
 	urlPoster: string;
 	type: string;
