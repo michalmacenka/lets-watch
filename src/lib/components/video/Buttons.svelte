@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { slide } from 'svelte/transition';
 	//@ts-ignore
 	import CopyToClipboard from 'svelte-copy-to-clipboard';
 
@@ -8,37 +7,13 @@
 	import { videoInfo } from '$core/store/writable';
 
 	let copyBtnText = 'Copy URL';
-	let playDropdown = false;
 </script>
 
 <section class="mt-16 flex gap-4 items-start flex-wrap">
-	<div
-		class="w-full max-w-[8rem] "
-		on:mouseenter={() => (playDropdown = true)}
-		on:focusin={() => (playDropdown = true)}
-		on:mouseleave={() => (playDropdown = false)}
-		on:focusout={() => (playDropdown = false)}
-	>
-		<Button
-			look="custom"
-			class="w-full justify-center relative outline-none z-10 border-2 {playDropdown
-				? 'bg-dark text-main border-dark'
-				: 'bg-main  text-dark border-main'}
-    "><i class="ri-play-fill -mt-0.5" /> Play</Button
+	<div class="w-full max-w-[8rem] ">
+		<Button look="fill" class="w-full flex justify-center " on:click
+			><i class="ri-play-fill -mt-0.5" /> Play</Button
 		>
-		{#if playDropdown}
-			<ul
-				transition:slide={{ duration: 200 }}
-				class="bg-dark text-light  backdrop-filter backdrop-blur text-sm px-4 pb-3 pt-4 rounded-b-lg   -mt-2  flex flex-col gap-2"
-			>
-				<li class="cursor-pointer hover:text-main  duration-300">
-					<a href="#">with subtitles</a>
-				</li>
-				<li class="cursor-pointer hover:text-main  duration-300">
-					<a href="#">with cz dabing</a>
-				</li>
-			</ul>
-		{/if}
 	</div>
 	<a href={$videoInfo.urlIMDB} target="noreferrer">
 		<Button>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import axios from 'axios';
 	import { FastAverageColor } from 'fast-average-color';
-	import { blur } from 'svelte/transition';
+	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
 	import type { PageData } from './$types';
@@ -9,9 +9,12 @@
 	import Informations from '$lib/components/video/Informations.svelte';
 	import Buttons from '$lib/components/video/Buttons.svelte';
 	import animationVideoInformations from '$core/animations/videoInformations';
+	import PlayType from '$lib/components/video/PlayType.svelte';
 
 	export let data: PageData;
 	$: $videoInfo = data.videoInfo;
+
+	let playBox = true;
 
 	let img: HTMLImageElement;
 
@@ -40,7 +43,7 @@
 	onMount(animationVideoInformations);
 </script>
 
-<main class="w-full flex justify-between  ">
+<main class="w-full flex justify-between items-start ">
 	{#if mainColor}
 		<div
 			transition:blur={{ duration: 500 }}
@@ -66,5 +69,14 @@
 		{/if}
 	</div>
 
-	<div class="text-light max-w-xl w-full infoSlide"><Informations /> <Buttons /></div>
+	<div class="text-light max-w-xl w-full infoSlide">
+		<Informations />
+		<Buttons on:click={() => (playBox = !playBox)} />
+	</div>
+	{#if playBox}
+		<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30 }}>
+			<h3 class="text-4xl font-bold text-white mb-4">Play Video</h3>
+			<PlayType />
+		</div>
+	{/if}
 </main>

@@ -21,9 +21,9 @@
 		type={$$props.type}
 		class="
   {$$props.class}
-  bg-main  text-dark
+  bg-main  text-dark border-2 border-main
   hover:text-main 
-  hover:bg-dark/20
+  hover:bg-dark/20 hover:border-dark
  "><slot>Button</slot></button
 	>
 {:else if look === 'custom'}
