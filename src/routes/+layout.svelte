@@ -15,10 +15,14 @@
 
 <div class="font-body text-white sm:px-16 px-6 sm:py-8 py-4 w-full">
 	<header class="flex flex-col items-center  w-full gap-5 mb-16">
-		<h1 class="uppercase text-xl font-bold tracking-widest z-50">
-			Let's <span class="text-main ">Watch!</span>
-		</h1>
+		<a href="/">
+			<h1 class="uppercase text-xl font-bold tracking-widest z-50">
+				Let's <span class="text-main ">Watch!</span>
+			</h1>
+		</a>
 		<Searchbar />
 	</header>
-	<slot />
+	<main class="w-full max-w-7xl mx-auto">
+		<slot />
+	</main>
 </div>

@@ -7,9 +7,9 @@ export default () => {
 	gsap.registerPlugin(ScrollTrigger);
 	ScrollTrigger.batch('.popularVideo', {
 		onEnter: (elements: HTMLElement) => {
-			gsap.from(elements, {
-				autoAlpha: 0,
-				y: 40,
+			gsap.to(elements, {
+				autoAlpha: 1,
+				y: 0,
 				stagger: 0.15
 			});
 		},

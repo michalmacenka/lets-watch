@@ -2,11 +2,13 @@
 	import axios from 'axios';
 	import { FastAverageColor } from 'fast-average-color';
 	import { blur } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	import type { PageData } from './$types';
 	import { videoInfo } from '$core/store/writable';
 	import Informations from '$lib/components/video/Informations.svelte';
 	import Buttons from '$lib/components/video/Buttons.svelte';
+	import animationVideoInformations from '$core/animations/videoInformations';
 
 	export let data: PageData;
 	$: $videoInfo = data.videoInfo;
@@ -20,7 +22,7 @@
 
 	const getColor = () => {
 		const fac = new FastAverageColor();
-		const color = fac.getColor(img, { algorithm: 'simple' });
+		const color = fac.getColor(img);
 		mainColor = color.hex;
 		isMainColorDark = color.isDark;
 	};
@@ -31,19 +33,20 @@
 			url: '/api/background?src=' + url
 		});
 		imgData = data;
-		// await getColor();
 	};
 
 	$: getImg($videoInfo.urlBg);
+
+	onMount(animationVideoInformations);
 </script>
 
-<main class="h-screen w-full flex justify-between  ">
+<main class="w-full flex justify-between  ">
 	{#if mainColor}
 		<div
 			transition:blur={{ duration: 500 }}
 			style="background-color: {mainColor};"
 			class="w-full h-full fixed {isMainColorDark
-				? 'opacity-30'
+				? 'opacity-40'
 				: 'opacity-[0.15]'}  top-0 left-0 -z-20 bg-gradient-to-r from-dark via-transparent"
 		/>
 	{/if}
@@ -63,5 +66,5 @@
 		{/if}
 	</div>
 
-	<div class="text-light max-w-xl w-full"><Informations /> <Buttons /></div>
+	<div class="text-light max-w-xl w-full infoSlide"><Informations /> <Buttons /></div>
 </main>

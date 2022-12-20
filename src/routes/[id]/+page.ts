@@ -12,12 +12,11 @@ export const load: PageLoad<OutputProps> = async ({ params }) => {
 	try {
 		const idIMDB = params.id;
 
-		if (idIMDB.match(/tt[0-9]*/)) {
+		if (idIMDB.match(/^tt[0-9]*$/)) {
 			const videoInfo: SI.VideoInfo = await getVideoInformatios(idIMDB);
-			console.log(videoInfo);
 			return { videoInfo };
 		}
-		throw error(404, 'not found');
+		throw error(404, 'Not found');
 	} catch (err) {
 		throw error(404, 'Something happened');
 	}
