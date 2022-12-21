@@ -11,6 +11,7 @@
 	import Buttons from '$lib/components/video/Buttons.svelte';
 	import Playbox from '$lib/components/video/Playbox.svelte';
 	import getVideoInformatios from '$core/services/videoInformatios';
+	import Videos from '$lib/components/video/play/Videos.svelte';
 
 	export let data: PageData;
 
@@ -20,6 +21,7 @@
 	let mainColor = '';
 	let isMainColorDark = false;
 	let imgData = '';
+	let playType = '';
 	let playPage = false;
 
 	const fetch = async (id: string) => {
@@ -28,6 +30,7 @@
 			mainColor = '';
 			pageStatus = 0;
 			$videoInfo = await getVideoInformatios(id);
+			$videoInfo.seasons.reverse();
 			pageStatus = 200;
 			getImg($videoInfo.urlBg);
 		} catch (err) {
@@ -36,7 +39,8 @@
 	};
 
 	const playSection = (type: string) => {
-		playPage = type === 'subtitles' || type === 'czech';
+		playType = type;
+		playPage = type === 'subtitles' || type === 'czech' || type === 'all';
 	};
 
 	const getColor = () => {
@@ -106,6 +110,8 @@
 					<Playbox />
 				</div>
 			{/if}
+		{:else}
+			<Videos {playType} />
 		{/if}
 	{:else if pageStatus === 0}
 		<div

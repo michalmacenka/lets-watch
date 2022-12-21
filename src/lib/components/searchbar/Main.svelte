@@ -57,7 +57,7 @@
 		<div
 			class:w-full={term.length === 0}
 			class:brightness-125={!inSearch}
-			class="absolute flex px-5 text-middle gap-5 items-center z-40  -translate-y-[0.05rem]  "
+			class="absolute flex px-5 text-light/50 gap-5 items-center z-40  -translate-y-[0.05rem]  "
 		>
 			<button type="submit" class="flex items-center">
 				<i class="{searching ? 'ri-loader-4-line animate-spin' : 'ri-search-line'} " />
