@@ -1,11 +1,8 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-import getVideoInformatios from '$core/services/videoInformatios';
-import type * as SI from '$core/schemas/videoInformations';
-
 type OutputProps = {
-	videoInfo: SI.VideoInfo;
+	idIMDB: string;
 };
 
 export const load: PageLoad<OutputProps> = async ({ params }) => {
@@ -13,8 +10,7 @@ export const load: PageLoad<OutputProps> = async ({ params }) => {
 		const idIMDB = params.id;
 
 		if (idIMDB.match(/^tt[0-9]*$/)) {
-			const videoInfo: SI.VideoInfo = await getVideoInformatios(idIMDB);
-			return { videoInfo };
+			return { idIMDB };
 		}
 		throw error(404, 'Not found');
 	} catch (err) {

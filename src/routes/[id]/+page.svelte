@@ -2,30 +2,39 @@
 	import axios from 'axios';
 	import { FastAverageColor } from 'fast-average-color';
 	import { blur, fly } from 'svelte/transition';
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+
 	import { page } from '$app/stores';
 
 	import type { PageData } from './$types';
 	import { videoInfo } from '$core/store/writable';
 	import Informations from '$lib/components/video/Informations.svelte';
 	import Buttons from '$lib/components/video/Buttons.svelte';
-	import animationVideoInformations from '$core/animations/videoInformations';
 	import Playbox from '$lib/components/video/Playbox.svelte';
-
-	onMount(animationVideoInformations);
+	import getVideoInformatios from '$core/services/videoInformatios';
 
 	export let data: PageData;
-	$: $videoInfo = data.videoInfo;
 
+	let pageStatus = 0;
 	let playBox = false;
 	let img: HTMLImageElement;
 	let mainColor = '';
 	let isMainColorDark = false;
 	let imgData = '';
-	type playTypeOptions = 'subtitles' | 'czech' | '';
-	let playType: playTypeOptions = '';
+	let playType: string = '';
 	let playPage = false;
+
+	const fetch = async (id: string) => {
+		try {
+			imgData = '';
+			mainColor = '';
+			pageStatus = 0;
+			$videoInfo = await getVideoInformatios(id);
+			pageStatus = 200;
+			getImg($videoInfo.urlBg);
+		} catch (err) {
+			pageStatus = 500;
+		}
+	};
 
 	const getColor = () => {
 		const fac = new FastAverageColor();
@@ -41,10 +50,9 @@
 		});
 		imgData = data;
 	};
-
-	$: getImg($videoInfo.urlBg);
-	$: play = $page.url.searchParams.get('type') || '';
-	$: play === 'subtitles' || play === 'czech' ? (playPage = true) : (playPage = false);
+	$: fetch(data.idIMDB);
+	$: playType = $page.url.searchParams.get('type') || '';
+	$: playType === 'subtitles' || playType === 'czech' ? (playPage = true) : (playPage = false);
 </script>
 
 <main class="w-full flex justify-between items-start ">
@@ -76,20 +84,31 @@
 			/>
 		{/if}
 	</div>
-
-	{#if !playPage}
-		<div
-			class="text-light max-w-xl w-full infoSlide sticky top-14"
-			out:fly={{ x: -30, duration: 300 }}
-		>
-			<Informations />
-			<Buttons on:click={() => (playBox = !playBox)} />
-		</div>
-		{#if playBox}
-			<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30, duration: 300 }}>
-				<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
-				<Playbox />
+	{#if pageStatus === 200}
+		{#if !playPage}
+			<div
+				class="text-light max-w-xl w-full infoSlide sticky top-14"
+				transition:fly={{ x: -30, duration: 300 }}
+			>
+				<Informations />
+				<Buttons on:click={() => (playBox = !playBox)} />
 			</div>
+			{#if playBox}
+				<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30, duration: 300 }}>
+					<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
+					<Playbox />
+				</div>
+			{/if}
 		{/if}
+	{:else if pageStatus === 0}
+		<div
+			class="flex items-center justify-center w-full gap-2 font-semibold text-middle text-xl "
+			in:blur
+		>
+			<i class="ri-loader-4-line animate-spin" />
+			<h2>Loading</h2>
+		</div>
+	{:else}
+		<h2 class="mx-auto text-middle text-xl font-semibold">Error</h2>
 	{/if}
 </main>
