@@ -17,6 +17,7 @@ module.exports = {
 				main: '#FCC537',
 				'blue-main': '#2555FA',
 				'red-main': '#FA3265',
+				'green-main': '#19FAB8',
 				'purple-main': '#9A23AD'
 			}
 		}

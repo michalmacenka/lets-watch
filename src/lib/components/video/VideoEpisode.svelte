@@ -21,7 +21,7 @@
 	</p>
 	{#if open}
 		<div class="p-2">
-			<PlayType />
+			<PlayType season={episode.numSeason} episode={episode.episode} />
 		</div>
 	{/if}
 </li>

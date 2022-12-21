@@ -3,6 +3,8 @@
 	import { FastAverageColor } from 'fast-average-color';
 	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	import type { PageData } from './$types';
 	import { videoInfo } from '$core/store/writable';
@@ -11,17 +13,19 @@
 	import animationVideoInformations from '$core/animations/videoInformations';
 	import Playbox from '$lib/components/video/Playbox.svelte';
 
+	onMount(animationVideoInformations);
+
 	export let data: PageData;
 	$: $videoInfo = data.videoInfo;
 
 	let playBox = false;
-
 	let img: HTMLImageElement;
-
 	let mainColor = '';
 	let isMainColorDark = false;
-
 	let imgData = '';
+	type playTypeOptions = 'subtitles' | 'czech' | '';
+	let playType: playTypeOptions = '';
+	let playPage = false;
 
 	const getColor = () => {
 		const fac = new FastAverageColor();
@@ -39,8 +43,8 @@
 	};
 
 	$: getImg($videoInfo.urlBg);
-
-	onMount(animationVideoInformations);
+	$: play = $page.url.searchParams.get('type') || '';
+	$: play === 'subtitles' || play === 'czech' ? (playPage = true) : (playPage = false);
 </script>
 
 <main class="w-full flex justify-between items-start ">
@@ -54,8 +58,12 @@
 		/>
 	{/if}
 	<div
-		class="w-2/3 h-screen fixed top-0 right-0 -z-10 "
-		style="-webkit-mask-image: linear-gradient(-80deg, black 0%, transparent 83%);"
+		class="{!playPage
+			? 'w-2/3'
+			: 'w-full opacity-50'} h-screen fixed top-0 right-0 -z-10 duration-1000 ease-in-out"
+		style={!playPage
+			? '-webkit-mask-image: linear-gradient(-80deg, black 0%, transparent 83%);'
+			: '-webkit-mask-image: linear-gradient(-90deg, black 0%, transparent 100%);'}
 	>
 		{#if imgData}
 			<img
@@ -69,17 +77,19 @@
 		{/if}
 	</div>
 
-	<div
-		class="text-light max-w-xl w-full infoSlide sticky top-14"
-		out:fly={{ x: -30, duration: 300 }}
-	>
-		<Informations />
-		<Buttons on:click={() => (playBox = !playBox)} />
-	</div>
-	{#if playBox}
-		<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30, duration: 300 }}>
-			<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
-			<Playbox />
+	{#if !playPage}
+		<div
+			class="text-light max-w-xl w-full infoSlide sticky top-14"
+			out:fly={{ x: -30, duration: 300 }}
+		>
+			<Informations />
+			<Buttons on:click={() => (playBox = !playBox)} />
 		</div>
+		{#if playBox}
+			<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30, duration: 300 }}>
+				<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
+				<Playbox />
+			</div>
+		{/if}
 	{/if}
 </main>

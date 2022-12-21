@@ -104,7 +104,7 @@
 			type="text"
 			class="pt-3.5  pb-3 px-14 text-white {inSearch
 				? 'bg-dark'
-				: 'bg-middle/30'}  rounded-lg backdrop-blur w-full select-none"
+				: 'bg-middle/30 '}  rounded-lg backdrop-blur-lg  w-full select-none"
 		/>
 	</div>
 	{#if inSearch && results.length}
