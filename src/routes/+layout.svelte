@@ -26,3 +26,8 @@
 		<slot />
 	</main>
 </div>
+<img
+	src="/bg.jpg"
+	alt="background"
+	class="w-full bg-cover h-full fixed top-0 mix-blend-screen opacity-20 -z-50  "
+/>

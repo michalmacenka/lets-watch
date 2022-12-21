@@ -20,7 +20,6 @@
 	let mainColor = '';
 	let isMainColorDark = false;
 	let imgData = '';
-	let playType: string = '';
 	let playPage = false;
 
 	const fetch = async (id: string) => {
@@ -34,6 +33,10 @@
 		} catch (err) {
 			pageStatus = 500;
 		}
+	};
+
+	const playSection = (type: string) => {
+		playPage = type === 'subtitles' || type === 'czech';
 	};
 
 	const getColor = () => {
@@ -50,25 +53,25 @@
 		});
 		imgData = data;
 	};
+
 	$: fetch(data.idIMDB);
-	$: playType = $page.url.searchParams.get('type') || '';
-	$: playType === 'subtitles' || playType === 'czech' ? (playPage = true) : (playPage = false);
+	$: playSection($page.url.searchParams.get('type') || '');
 </script>
 
-<main class="w-full flex justify-between items-start ">
+<main class="w-full md:flex justify-between items-start ">
 	{#if mainColor}
 		<div
-			transition:blur={{ duration: 500 }}
+			in:blur={{ duration: 500 }}
 			style="background-color: {mainColor};"
 			class="w-full h-full fixed {isMainColorDark
-				? 'opacity-40'
-				: 'opacity-[0.15]'}  top-0 left-0 -z-20 bg-gradient-to-r from-dark via-transparent"
+				? 'opacity-50'
+				: 'opacity-30'}  top-0 left-0 -z-20 bg-gradient-to-r from-dark via-transparent "
 		/>
 	{/if}
 	<div
 		class="{!playPage
 			? 'w-2/3'
-			: 'w-full opacity-50'} h-screen fixed top-0 right-0 -z-10 duration-1000 ease-in-out"
+			: 'w-full opacity-50'} h-screen fixed top-0 right-0 -z-10 duration-1000 ease-in-out "
 		style={!playPage
 			? '-webkit-mask-image: linear-gradient(-80deg, black 0%, transparent 83%);'
 			: '-webkit-mask-image: linear-gradient(-90deg, black 0%, transparent 100%);'}
@@ -77,24 +80,28 @@
 			<img
 				src="data:image/png;base64,{imgData}"
 				alt="Video poster"
-				transition:blur={{ duration: 500 }}
+				in:blur={{ duration: 500 }}
 				class=" object-cover w-full h-full object-[0%] "
 				bind:this={img}
 				on:load={getColor}
 			/>
 		{/if}
 	</div>
+
 	{#if pageStatus === 200}
 		{#if !playPage}
 			<div
-				class="text-light max-w-xl w-full infoSlide sticky top-14"
+				class="text-light max-w-xl w-full md:sticky top-14"
 				transition:fly={{ x: -30, duration: 300 }}
 			>
 				<Informations />
 				<Buttons on:click={() => (playBox = !playBox)} />
 			</div>
 			{#if playBox}
-				<div class="flex flex-col w-full place-items-end" transition:fly={{ x: 30, duration: 300 }}>
+				<div
+					class="flex flex-col w-full md:place-items-end max-md:mt-24"
+					transition:fly={{ x: 30, duration: 300 }}
+				>
 					<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
 					<Playbox />
 				</div>

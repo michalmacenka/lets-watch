@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition';
+
 	import type { EpisodeInfo } from '$core/schemas/videoInformations';
 	import PlayType from './PlayType.svelte';
 
@@ -20,7 +22,7 @@
 		{episode.numSeason}.{episode.episode} - {episode.title}
 	</p>
 	{#if open}
-		<div class="p-2">
+		<div class="p-2" transition:slide={{ duration: 200 }}>
 			<PlayType season={episode.numSeason} episode={episode.episode} />
 		</div>
 	{/if}
