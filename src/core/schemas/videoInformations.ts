@@ -3,6 +3,7 @@ export interface EpisodeInfo {
 	numSeason: number;
 	idIMDB: string;
 	title: string;
+	plot: string;
 }
 
 export interface SeasonInfo {

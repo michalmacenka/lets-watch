@@ -115,13 +115,13 @@
 		{/if}
 	{:else if pageStatus === 0}
 		<div
-			class="flex items-center justify-center w-full gap-2 font-semibold text-middle text-xl "
+			class="flex items-center justify-center w-full gap-2 font-semibold text-light text-xl "
 			in:blur
 		>
 			<i class="ri-loader-4-line animate-spin" />
 			<h2>Loading</h2>
 		</div>
 	{:else}
-		<h2 class="mx-auto text-middle text-xl font-semibold">Error</h2>
+		<h2 class="mx-auto text-light text-xl font-semibold">Error</h2>
 	{/if}
 </main>

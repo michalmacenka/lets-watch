@@ -8,4 +8,6 @@ const popularVideos: Writable<SP.Video[]> = writable([]);
 
 const videoInfo: Writable<SI.VideoInfo> = writable();
 
-export { popularVideos, videoInfo };
+const episodeInfo: Writable<SI.EpisodeInfo> = writable();
+
+export { popularVideos, videoInfo, episodeInfo };
