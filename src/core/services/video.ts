@@ -26,9 +26,10 @@ const getVideoResults = async (
 const getVideo = async (path: string, id: string, site: number): Promise<SV.Video> => {
 	try {
 		const { data } = await axios({
+			method: 'POST',
 			baseURL: import.meta.env.VITE_LETSWATCH_API_URL,
 			url: '/api/video/',
-			params: {
+			data: {
 				path,
 				id,
 				site

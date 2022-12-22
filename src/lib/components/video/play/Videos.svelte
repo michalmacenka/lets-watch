@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import humanizeDuration from 'humanize-duration';
-	import { blur, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	import { getVideoResults } from '$core/services/video';
 	import { videoInfo, episodeInfo } from '$core/store/writable';
@@ -12,6 +12,8 @@
 	export let playType: string;
 
 	let isMovie: boolean;
+
+	let selectedVideoResult: SV.VideoResult;
 
 	const search = async (): Promise<{ recommended: SV.VideoResult; other: SV.VideoResult[] }> => {
 		let episode = $page.url.searchParams.get('e') || '';
@@ -32,38 +34,45 @@
 		let series = !isMovie ? `s${season}e${episode}` : '';
 		let term = `${$videoInfo.title} ${series} ${playType}`;
 		const data = await getVideoResults(term, $videoInfo.duration, isMovie);
+		selectedVideoResult = data.recommended;
 		return data;
 	};
 </script>
 
 {#await search() then data}
-	<div class="w-full  mx-auto">
-		<div class="md:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
-			{#if !isMovie}
-				<p class="text-main">
-					s{('0' + $episodeInfo?.numSeason).slice(-2)}e{('0' + $episodeInfo?.episode).slice(-2)} -
-					{$videoInfo.title}
-				</p>
-			{/if}
+	<div class="w-full mx-auto">
+		<div class="lg:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
+			<p class="text-main">
+				{$videoInfo.title}
+			</p>
 
-			<h1 class="text-2xl font-bold text-white -mt-1 ">
-				{$episodeInfo?.title || $videoInfo.title}
-			</h1>
+			<div class="text-2xl font-bold text-white -mt-1 flex gap-2">
+				{#if !isMovie}
+					<h1>
+						s{('0' + $episodeInfo?.numSeason).slice(-2)}e{('0' + $episodeInfo?.episode).slice(-2)} -
+					</h1>
+				{/if}
+
+				<h1>
+					{$episodeInfo?.title || $videoInfo.title}
+				</h1>
+			</div>
 		</div>
-		<div class="w-full grid grid-flow-col grid-cols-[5fr_3fr]  gap-8 ">
-			<div class="md:sticky top-24">
-				<Player />
+		<div class="w-full lg:grid grid-flow-col grid-cols-[5fr_3fr]  gap-8 ">
+			<div class="lg:sticky top-24">
+				<Player videoResult={selectedVideoResult} />
 				<div in:fly={{ x: -30, duration: 300 }}>
-					<h2>{data.recommended.name}</h2>
-					<span class="text-middle flex items-center gap-2">
+					<h2 class="text-white font-medium">{data.recommended.name}</h2>
+					<span class="text-white flex items-center gap-2">
 						{#if data.recommended.hd}
 							<i class="ri-hd-line text-red-main" />
 						{/if}
 						<p>{humanizeDuration(data.recommended.duration * 1000)}</p>
 					</span>
+					<p class="mt-3 text-light italic ">{$episodeInfo?.plot || $videoInfo.description}</p>
 				</div>
 			</div>
-			<ul class="row-span-2 flex flex-col gap-3 max-h-full  mt-5">
+			<ul class="row-span-2 flex flex-col gap-3 max-h-full mt-14 lg:mt-5">
 				{#each data.other as video, i}
 					<OtherVideo {video} {i} />
 				{/each}

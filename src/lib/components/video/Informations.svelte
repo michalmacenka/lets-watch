@@ -37,7 +37,7 @@
 			</div>
 		</figure>
 	</div>
-	<p class="w-full max-w-xl  text-light/50 my-5">{$videoInfo.description}</p>
+	<p class="w-full max-w-xl italic text-light/50 my-5">{$videoInfo.description}</p>
 
 	<ul class="flex gap-2 ">
 		<li class=" {type.bg}  bg-opacity-50  backdrop-blur  capitalize rounded  py-1 px-3 mr-6 ">
