@@ -3,15 +3,14 @@
 	import 'plyr/dist/plyr.css';
 	import { onMount } from 'svelte';
 
-	let playerElement: HTMLElement;
 	onMount(() => {
-		const player = new Plyr(playerElement, { iconUrl: '/sprite.svg' });
+		const player = new Plyr('#player', { iconUrl: '/sprite.svg' });
 	});
 </script>
 
 <div class="my-5 ">
 	<video
-		bind:this={playerElement}
+		id="player"
 		controls
 		playsinline
 		poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
@@ -51,3 +50,7 @@
 		>
 	</video>
 </div>
+
+<style lang="scss">
+	@use './Player';
+</style>
