@@ -37,6 +37,7 @@
 		"plyr": "^3.7.3",
 		"remixicon": "^2.5.0",
 		"sass": "^1.56.1",
+		"srt-webvtt": "^2.0.0",
 		"svelte-copy-to-clipboard": "^0.2.5",
 		"svelte-lazy": "^1.1.0",
 		"svelte-plyr": "^0.1.3",

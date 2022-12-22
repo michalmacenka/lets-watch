@@ -1,28 +1,25 @@
 <script lang="ts">
 	import Plyr from 'plyr';
 	import 'plyr/dist/plyr.css';
+	import { default as toWebVTT } from 'srt-webvtt';
 
 	import { blur } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
 	import { getVideo } from '$core/services/video';
 	import type * as SV from '$core/schemas/video';
-	import { videoInfo, episodeInfo } from '$core/store/writable';
+	import { videoInfo } from '$core/store/writable';
 
 	export let videoResult: SV.VideoResult;
 
 	let player: any;
 
-	const initVideo = async () => {
-		const videoData: SV.Video = await getVideo(
-			videoResult.video.path,
-			videoResult.video.id,
-			videoResult.video.site
-		);
+	const initVideo = async (v: SV.VideoResult) => {
+		const videoData: SV.Video = await getVideo(v.video.path, v.video.id, v.video.site);
 
 		player.source = {
 			type: 'video',
-			title: $episodeInfo.title,
+			title: $videoInfo.title,
 			sources: videoData.video,
 			tracks: videoData.subtitles
 		};
@@ -32,8 +29,8 @@
 
 	onMount(() => {
 		player = new Plyr('#player', { iconUrl: '/sprite.svg' });
-		initVideo();
 	});
+	$: initVideo(videoResult);
 </script>
 
 <div class="my-5" in:blur={{ duration: 500 }}>

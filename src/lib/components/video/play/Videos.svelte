@@ -37,14 +37,20 @@
 		selectedVideoResult = data.recommended;
 		return data;
 	};
+
+	const handleSelectVideo = (event: any) => {
+		selectedVideoResult = event.detail.video;
+	};
 </script>
 
 {#await search() then data}
 	<div class="w-full mx-auto">
 		<div class="lg:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
-			<p class="text-main">
-				{$videoInfo.title}
-			</p>
+			{#if !isMovie}
+				<p class="text-main">
+					{$videoInfo.title}
+				</p>
+			{/if}
 
 			<div class="text-2xl font-bold text-white -mt-1 flex gap-2">
 				{#if !isMovie}
@@ -62,19 +68,24 @@
 			<div class="lg:sticky top-24">
 				<Player videoResult={selectedVideoResult} />
 				<div in:fly={{ x: -30, duration: 300 }}>
-					<h2 class="text-white font-medium">{data.recommended.name}</h2>
+					<h2 class="text-white font-medium">{selectedVideoResult.name}</h2>
 					<span class="text-white flex items-center gap-2">
-						{#if data.recommended.hd}
+						{#if selectedVideoResult.hd}
 							<i class="ri-hd-line text-red-main" />
 						{/if}
-						<p>{humanizeDuration(data.recommended.duration * 1000)}</p>
+						<p>{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
 					</span>
 					<p class="mt-3 text-light italic ">{$episodeInfo?.plot || $videoInfo.description}</p>
 				</div>
 			</div>
 			<ul class="row-span-2 flex flex-col gap-3 max-h-full mt-14 lg:mt-5">
 				{#each data.other as video, i}
-					<OtherVideo {video} {i} />
+					<OtherVideo
+						{video}
+						{i}
+						selected={video.video.id === selectedVideoResult.video.id}
+						on:selectVideo={handleSelectVideo}
+					/>
 				{/each}
 			</ul>
 		</div>

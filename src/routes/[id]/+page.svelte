@@ -6,7 +6,7 @@
 	import { page } from '$app/stores';
 
 	import type { PageData } from './$types';
-	import { videoInfo } from '$core/store/writable';
+	import { videoInfo, episodeInfo } from '$core/store/writable';
 	import Informations from '$lib/components/video/Informations.svelte';
 	import Buttons from '$lib/components/video/Buttons.svelte';
 	import Playbox from '$lib/components/video/Playbox.svelte';
