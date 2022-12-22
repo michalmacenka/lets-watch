@@ -1,7 +1,5 @@
 <script lang="ts">
-	import Plyr from 'plyr';
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import humanizeDuration from 'humanize-duration';
 	import { blur, fly } from 'svelte/transition';
 
@@ -9,13 +7,9 @@
 	import { videoInfo, episodeInfo } from '$core/store/writable';
 	import type * as SV from '$core/schemas/video';
 	import OtherVideo from './OtherVideo.svelte';
+	import Player from './Player.svelte';
 
 	export let playType: string;
-	let videoElement: HTMLElement;
-
-	onMount(() => {
-		const player = new Plyr(videoElement);
-	});
 
 	let isMovie: boolean;
 
@@ -58,7 +52,7 @@
 		</div>
 		<div class="w-full grid grid-flow-col grid-cols-[5fr_3fr]  gap-8 ">
 			<div class="md:sticky top-24">
-				<div in:blur={{ duration: 500 }} class="w-full h-96 bg-middle rounded-lg my-5" />
+				<Player />
 				<div in:fly={{ x: -30, duration: 300 }}>
 					<h2>{data.recommended.name}</h2>
 					<span class="text-middle flex items-center gap-2">
