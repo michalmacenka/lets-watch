@@ -60,7 +60,7 @@
 				{/if}
 
 				<h1>
-					{$episodeInfo?.title || $videoInfo.title}
+					{!isMovie ? $episodeInfo?.title : $videoInfo.title}
 				</h1>
 			</div>
 		</div>

@@ -9,7 +9,7 @@
 	let type: VideoType;
 	$: type = getType($videoInfo.type.replaceAll(' ', ''));
 
-	const starW = Math.round(($videoInfo.rating /= Math.pow(10, -1)));
+	const starW = Math.round($videoInfo.rating / Math.pow(10, -1));
 </script>
 
 <section>
@@ -20,7 +20,7 @@
 		</p>
 		<div class="flex text-light items-center  ">
 			<p>
-				{($videoInfo.rating / 10).toFixed(1)}
+				{$videoInfo.rating.toFixed(1)}
 			</p>
 			<div class="stars relative transform scale-75 -mt-0.5  text-main ">
 				<div class="absolute left-0 top-0 overflow-hidden flex gap-0.5" style="width: {starW}%">

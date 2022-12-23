@@ -17,7 +17,7 @@
 	const initVideo = async (v: SV.VideoResult) => {
 		let videoData: SV.Video = await getVideo(v.video.path, v.video.id, v.video.site);
 
-		if (v.video.site === 2) {
+		if (v.video.site === 2 && videoData.subtitles.length) {
 			videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
 			videoData.subtitles[0].label = 'Subtitles';
 		}
