@@ -16,7 +16,7 @@
 	export let data: PageData;
 
 	let pageStatus = 0;
-	let playBox = true;
+	let playBox = false;
 	let img: HTMLImageElement;
 	let mainColor = '';
 	let isMainColorDark = false;
@@ -26,6 +26,7 @@
 
 	const fetch = async (id: string) => {
 		try {
+			playBox = false;
 			imgData = '';
 			mainColor = '';
 			pageStatus = 0;

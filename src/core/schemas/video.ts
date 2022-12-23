@@ -1,5 +1,5 @@
 export interface Video {
-	video: { src: string; label?: string }[];
+	video: { src: string; size?: string }[];
 	subtitles: { src: string; label: string }[];
 }
 

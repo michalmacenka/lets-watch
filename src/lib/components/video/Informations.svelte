@@ -18,6 +18,9 @@
 		<p>
 			{humanizeDuration($videoInfo.duration * 1000)}
 		</p>
+		<p>
+			{$videoInfo.year}
+		</p>
 		<div class="flex text-light items-center  ">
 			<p>
 				{$videoInfo.rating.toFixed(1)}

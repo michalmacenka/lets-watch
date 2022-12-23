@@ -81,14 +81,14 @@
 				</div>
 			</div>
 			<ul class="row-span-2 flex flex-col gap-3 max-h-full mt-14 lg:mt-5">
-				<h2 class="text-white font-medium text-right">Recommended</h2>
+				<h2 class="text-white font-medium lg:text-right">Recommended</h2>
 				<OtherVideo
 					video={data.recommended}
 					i={0}
 					selected={data.recommended.video.id === selectedVideoResult.video.id}
 					on:selectVideo={handleSelectVideo}
 				/>
-				<h2 class="text-white font-medium my-5 text-right">Others</h2>
+				<h2 class="text-white font-medium my-5 lg:text-right">Others</h2>
 				{#each data.other as video, i}
 					{#if video.video.id !== data.recommended.video.id}
 						<OtherVideo
