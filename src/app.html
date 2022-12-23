@@ -4,6 +4,17 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<title>letswatch</title>
+
+		<meta name="author" content="Michal Mačenka <my@michalmacenka.cz>" />
+		<meta name="application-name" content="letswatch" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#1C2331" />
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
@@ -11,15 +22,30 @@
 	</body>
 </html>
 
-<style>
-	body {
-		background-color: #101623;
-	}
-</style>
+<script>
+	const style =
+		'background: black; color: white; font-size: 20px; font-weight: bold; padding: 10px 20px 10px 20px; margin: 15px;';
+	const d = new Date();
+	console.log(`%c©${d.getFullYear()} Michal Mačenka`, style);
+</script>
 
 <style>
 	html {
 		scroll-behavior: smooth;
+	}
+
+	body {
+		background-color: #101623;
+	}
+
+	::-moz-selection {
+		color: #101623;
+		background: #d0d4da;
+	}
+
+	::selection {
+		color: #101623;
+		background: #d0d4da;
 	}
 
 	::-webkit-scrollbar {
