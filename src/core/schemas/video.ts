@@ -1,6 +1,6 @@
 export interface Video {
-	video: { path: string; label: string }[];
-	subtitles: { path: string; label: string }[];
+	video: { src: string; label?: string }[];
+	subtitles: { src: string; label: string }[];
 }
 
 export interface VideoResult {

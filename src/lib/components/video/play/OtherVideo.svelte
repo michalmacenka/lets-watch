@@ -12,9 +12,11 @@
 	const dispatch = createEventDispatcher();
 
 	const selectVideo = () => {
-		dispatch('selectVideo', {
-			video
-		});
+		if (!selected) {
+			dispatch('selectVideo', {
+				video
+			});
+		}
 	};
 </script>
 

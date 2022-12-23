@@ -8,6 +8,8 @@
 	$: $videoInfo.type = $videoInfo.type.replace(/[-_]/g, ' ').toLowerCase();
 	let type: VideoType;
 	$: type = getType($videoInfo.type.replaceAll(' ', ''));
+
+	const starW = Math.round(($videoInfo.rating /= Math.pow(10, -1)));
 </script>
 
 <section>
@@ -16,15 +18,12 @@
 		<p>
 			{humanizeDuration($videoInfo.duration * 1000)}
 		</p>
-		<figure class="flex text-light items-center  ">
-			<figcaption>
-				{$videoInfo.rating.toFixed(1)}
-			</figcaption>
+		<div class="flex text-light items-center  ">
+			<p>
+				{($videoInfo.rating / 10).toFixed(1)}
+			</p>
 			<div class="stars relative transform scale-75 -mt-0.5  text-main ">
-				<div
-					class="absolute left-0 top-0 overflow-hidden flex gap-0.5"
-					style="width: {Math.round(($videoInfo.rating /= Math.pow(10, -1)))}%"
-				>
+				<div class="absolute left-0 top-0 overflow-hidden flex gap-0.5" style="width: {starW}%">
 					{#each Array(5) as o}
 						<i class="ri-star-fill star" />
 					{/each}
@@ -35,7 +34,7 @@
 					{/each}
 				</div>
 			</div>
-		</figure>
+		</div>
 	</div>
 	<p class="w-full max-w-xl italic text-light/50 my-5">{$videoInfo.description}</p>
 

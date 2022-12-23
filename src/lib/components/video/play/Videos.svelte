@@ -52,10 +52,10 @@
 				</p>
 			{/if}
 
-			<div class="text-2xl font-bold text-white -mt-1 flex gap-2">
+			<div class="text-2xl font-bold text-white -mt-1 md:flex gap-6">
 				{#if !isMovie}
 					<h1>
-						s{('0' + $episodeInfo?.numSeason).slice(-2)}e{('0' + $episodeInfo?.episode).slice(-2)} -
+						s{('0' + $episodeInfo?.numSeason).slice(-2)}e{('0' + $episodeInfo?.episode).slice(-2)}
 					</h1>
 				{/if}
 
@@ -75,17 +75,31 @@
 						{/if}
 						<p>{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
 					</span>
-					<p class="mt-3 text-light italic ">{$episodeInfo?.plot || $videoInfo.description}</p>
+					<p class="mt-3 text-light italic ">
+						{!isMovie ? $episodeInfo?.plot : $videoInfo.description}
+					</p>
 				</div>
 			</div>
 			<ul class="row-span-2 flex flex-col gap-3 max-h-full mt-14 lg:mt-5">
+				<h2 class="text-white font-medium text-right">Recommended</h2>
+				<OtherVideo
+					video={data.recommended}
+					i={0}
+					selected={data.recommended.video.id === selectedVideoResult.video.id}
+					on:selectVideo={handleSelectVideo}
+				/>
+				<h2 class="text-white font-medium my-5 text-right">Others</h2>
 				{#each data.other as video, i}
-					<OtherVideo
-						{video}
-						{i}
-						selected={video.video.id === selectedVideoResult.video.id}
-						on:selectVideo={handleSelectVideo}
-					/>
+					{#if video.video.id !== data.recommended.video.id}
+						<OtherVideo
+							{video}
+							i={i + 1}
+							selected={video.video.id === selectedVideoResult.video.id}
+							on:selectVideo={handleSelectVideo}
+						/>
+					{/if}
+				{:else}
+					<h2 class="text-right text-light text-xl font-semibold">Nothing</h2>
 				{/each}
 			</ul>
 		</div>

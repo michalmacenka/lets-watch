@@ -16,7 +16,7 @@
 	export let data: PageData;
 
 	let pageStatus = 0;
-	let playBox = false;
+	let playBox = true;
 	let img: HTMLImageElement;
 	let mainColor = '';
 	let isMainColorDark = false;

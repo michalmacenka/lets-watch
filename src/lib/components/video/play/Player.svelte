@@ -6,7 +6,7 @@
 	import { blur } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
-	import { getVideo } from '$core/services/video';
+	import { getVideo, getSubtitles } from '$core/services/video';
 	import type * as SV from '$core/schemas/video';
 	import { videoInfo } from '$core/store/writable';
 
@@ -15,16 +15,19 @@
 	let player: any;
 
 	const initVideo = async (v: SV.VideoResult) => {
-		const videoData: SV.Video = await getVideo(v.video.path, v.video.id, v.video.site);
+		let videoData: SV.Video = await getVideo(v.video.path, v.video.id, v.video.site);
+
+		if (v.video.site === 2) {
+			videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
+			videoData.subtitles[0].label = 'Subtitles';
+		}
 
 		player.source = {
 			type: 'video',
 			title: $videoInfo.title,
 			sources: videoData.video,
-			tracks: videoData.subtitles
+			tracks: videoData.subtitles.slice(0, 5)
 		};
-
-		console.log(videoData);
 	};
 
 	onMount(() => {
