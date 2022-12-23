@@ -29,7 +29,7 @@
 	{#if selected}
 		<p class="text-sm ">Now Playing</p>
 	{/if}
-	<h5 class="col-span-2 {selected ? 'font-semibold text-main' : ''}">
+	<h5 class="col-span-2 overflow-hidden {selected ? 'font-semibold text-main' : ''}">
 		{video.name}
 	</h5>
 

@@ -68,10 +68,10 @@
 	}
 </script>
 
-<section class="flex flex-wrap justify-end gap-2">
+<section class="flex flex-wrap sm:justify-end gap-2 max-sm:my-4">
 	{#if previousEpisode && previousSeason}
 		<Button
-			class="text-sm justify-center"
+			class="text-sm justify-center max-sm:w-full"
 			on:click={() => switchEpisode(previousSeason, previousEpisode)}
 		>
 			<i class="ri-arrow-left-s-line" />
@@ -79,7 +79,10 @@
 		</Button>
 	{/if}
 	{#if nextEpisode && nextSeason}
-		<Button class="text-sm justify-center" on:click={() => switchEpisode(nextSeason, nextEpisode)}>
+		<Button
+			class="text-sm justify-center max-sm:w-full"
+			on:click={() => switchEpisode(nextSeason, nextEpisode)}
+		>
 			s{('0' + nextSeason).slice(-2)}e{('0' + nextEpisode).slice(-2)}
 			<i class="ri-arrow-right-s-line " />
 		</Button>

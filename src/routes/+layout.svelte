@@ -14,8 +14,19 @@
 </script>
 
 <div class="font-body text-white sm:px-16 px-6 sm:py-8 py-4 w-full">
-	<header class="flex flex-col items-center  w-full gap-5 mb-16 ">
-		<a href="/" class="z-50">
+	<div class="absolute top-0 max-sm:-translate-x-1/2 left-1/2 sm:left-0 m-3">
+		<a
+			href="https://github.com/michalmacenka"
+			target="noreferrer"
+			class="text-light hover:text-main transition-all text-left flex gap-2 items-center "
+		>
+			<img src="/mm.png" alt="Michal Mačenka logo" class="h-12" />
+			<h2 class="text-xs  ">Developed by <br /> Michal Mačenka</h2>
+		</a>
+	</div>
+	<header class="flex flex-col items-center text-center max-sm:mt-16  w-full gap-5 mb-16 ">
+		<a href="/" class="z-50 relative">
+			<h3 class="absolute -top-3 -left-1 text-sm text-main font-semibold">BETA</h3>
 			<h1 class="uppercase text-xl font-bold tracking-widest ">
 				Let's <span class="text-main ">Watch!</span>
 			</h1>

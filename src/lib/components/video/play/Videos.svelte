@@ -69,7 +69,7 @@
 			<div class="lg:sticky top-24">
 				<Player videoResult={selectedVideoResult} />
 				<div in:fly={{ x: -30, duration: 300 }}>
-					<div class="flex justify-between w-full items-start">
+					<div class="sm:flex justify-between w-full items-start gap-3">
 						<div>
 							<h2 class="text-white font-medium">{selectedVideoResult.name}</h2>
 							<span class="text-white flex items-center gap-2">
