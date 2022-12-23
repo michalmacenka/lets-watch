@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	import Button from '$lib/components/common/Button.svelte';
 	import { videoInfo, episodeInfo } from '$core/store/writable';
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 
 	let nextEpisode: number;
 	let nextSeason: number;
 
 	let previousEpisode: number;
 	let previousSeason: number;
+
+	const dispatch = createEventDispatcher();
 
 	const getNextEpisode = () => {
 		if (
@@ -51,17 +54,18 @@
 	const switchEpisode = (season: number, episode: number) => {
 		$page.url.searchParams.set('s', season.toString());
 		$page.url.searchParams.set('e', episode.toString());
+
+		dispatch('switchEpisode');
+
 		goto(`?${$page.url.searchParams.toString()}`, {
-			noScroll: true,
-			replaceState: true,
-			invalidateAll: true
+			noScroll: true
 		});
 	};
 
-	onMount(() => {
+	$: if ($episodeInfo) {
 		getNextEpisode();
 		getPreviousEpisode();
-	});
+	}
 </script>
 
 <section class="flex flex-wrap justify-end gap-2">

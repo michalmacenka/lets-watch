@@ -15,8 +15,9 @@
 	let isMovie: boolean;
 
 	let selectedVideoResult: SV.VideoResult;
+	let data: { recommended: SV.VideoResult; other: SV.VideoResult[] };
 
-	const search = async (): Promise<{ recommended: SV.VideoResult; other: SV.VideoResult[] }> => {
+	const search = async () => {
 		let episode = $page.url.searchParams.get('e') || '';
 		let season = $page.url.searchParams.get('s') || '';
 		isMovie = episode.length === 0 && season.length === 0;
@@ -34,9 +35,8 @@
 
 		let series = !isMovie ? `s${season}e${episode}` : '';
 		let term = `${$videoInfo.title} ${series} ${playType}`;
-		const data = await getVideoResults(term, $videoInfo.duration, isMovie);
+		data = await getVideoResults(term, $videoInfo.duration, isMovie);
 		selectedVideoResult = data.recommended;
-		return data;
 	};
 
 	const handleSelectVideo = (event: any) => {
@@ -44,7 +44,7 @@
 	};
 </script>
 
-{#await search() then data}
+{#await search() then v}
 	<div class="w-full mx-auto">
 		<div class="lg:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
 			{#if !isMovie}
@@ -80,7 +80,7 @@
 							</span>
 						</div>
 						{#if !isMovie}
-							<EpisodeSwitch />
+							<EpisodeSwitch on:switchEpisode={search} />
 						{/if}
 					</div>
 					<p class="mt-3 text-light italic col-span-2">
