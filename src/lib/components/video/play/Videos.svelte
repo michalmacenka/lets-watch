@@ -8,6 +8,7 @@
 	import type * as SV from '$core/schemas/video';
 	import OtherVideo from './OtherVideo.svelte';
 	import Player from './Player.svelte';
+	import EpisodeSwitch from './EpisodeSwitch.svelte';
 
 	export let playType: string;
 
@@ -68,14 +69,21 @@
 			<div class="lg:sticky top-24">
 				<Player videoResult={selectedVideoResult} />
 				<div in:fly={{ x: -30, duration: 300 }}>
-					<h2 class="text-white font-medium">{selectedVideoResult.name}</h2>
-					<span class="text-white flex items-center gap-2">
-						{#if selectedVideoResult.hd}
-							<i class="ri-hd-line text-red-main" />
+					<div class="flex justify-between w-full items-start">
+						<div>
+							<h2 class="text-white font-medium">{selectedVideoResult.name}</h2>
+							<span class="text-white flex items-center gap-2">
+								{#if selectedVideoResult.hd}
+									<i class="ri-hd-line text-red-main" />
+								{/if}
+								<p>{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
+							</span>
+						</div>
+						{#if !isMovie}
+							<EpisodeSwitch />
 						{/if}
-						<p>{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
-					</span>
-					<p class="mt-3 text-light italic ">
+					</div>
+					<p class="mt-3 text-light italic col-span-2">
 						{!isMovie ? $episodeInfo?.plot : $videoInfo.description}
 					</p>
 				</div>

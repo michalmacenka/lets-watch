@@ -21,7 +21,6 @@
 			videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
 			videoData.subtitles[0].label = 'Subtitles';
 		}
-		console.log(videoData);
 
 		player.source = {
 			type: 'video',

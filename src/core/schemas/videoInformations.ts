@@ -24,4 +24,5 @@ export interface VideoInfo {
 	urlBg: string;
 	year: number;
 	endYear?: number;
+	idIMDB: string;
 }
