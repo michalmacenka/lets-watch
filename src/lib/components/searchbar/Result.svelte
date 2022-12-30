@@ -11,7 +11,7 @@
 		on:click
 		data-sveltekit-preload-data="tap"
 		href="/{videoResult.id}"
-		class="flex gap-2 items-start hover:bg-light/5 py-2.5 rounded-lg transition-all px-5 "
+		class="flex gap-2 items-start hover:bg-light/5 py-2.5 rounded-lg  transition-all px-5 "
 	>
 		<img
 			src={videoResult.i.imageUrl}
@@ -19,7 +19,7 @@
 			class="object-cover h-16  w-12 rounded row-span-3"
 		/>
 
-		<div class="grow">
+		<div class="grow text-left ">
 			<p class="">{videoResult.l}</p>
 			<p class="text-middle text-sm mt-0.5  ">
 				{videoResult.yr || videoResult.y}

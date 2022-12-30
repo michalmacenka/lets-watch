@@ -11,6 +11,7 @@
 	import { videoInfo } from '$core/store/writable';
 
 	export let videoResult: SV.VideoResult;
+	export let videoResolution: number[];
 
 	let player: any;
 
@@ -21,17 +22,18 @@
 			videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
 			videoData.subtitles[0].label = 'Subtitles';
 		}
-
 		player.source = {
 			type: 'video',
 			title: $videoInfo.title,
 			sources: videoData.video,
-			tracks: videoData.subtitles.slice(0, 5)
+			tracks: videoData.subtitles
 		};
+		videoResolution = videoData.video.map(({ size }) => size);
 	};
 
 	onMount(() => {
 		player = new Plyr('#player', { iconUrl: '/sprite.svg' });
+		console.log(player.quality);
 	});
 	$: initVideo(videoResult);
 </script>

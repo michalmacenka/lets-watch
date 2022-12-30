@@ -17,6 +17,8 @@
 	let selectedVideoResult: SV.VideoResult;
 	let data: { recommended: SV.VideoResult; other: SV.VideoResult[] };
 
+	let videoResolution: number[] = [0];
+
 	const search = async () => {
 		let episode = $page.url.searchParams.get('e') || '';
 		let season = $page.url.searchParams.get('s') || '';
@@ -67,17 +69,25 @@
 		</div>
 		<div class="w-full lg:grid grid-flow-col grid-cols-[5fr_3fr]  gap-8 ">
 			<div class="lg:sticky top-24">
-				<Player videoResult={selectedVideoResult} />
+				<Player videoResult={selectedVideoResult} bind:videoResolution />
 				<div in:fly={{ x: -30, duration: 300 }}>
 					<div class="sm:flex justify-between w-full items-start gap-3">
 						<div>
 							<h2 class="text-white font-medium">{selectedVideoResult.name}</h2>
-							<span class="text-white flex items-center gap-2">
-								{#if selectedVideoResult.hd}
-									<i class="ri-hd-line text-red-main" />
+							<div class="text-white flex items-center gap-3">
+								{#if selectedVideoResult.hd && videoResolution[0]}
+									<span class="text-red-main flex items-center gap-1">
+										<i class="ri-hd-line -mt-1" />
+										{#each videoResolution as res}
+											<p>
+												{res}p
+											</p>
+										{/each}
+										<p />
+									</span>
 								{/if}
 								<p>{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
-							</span>
+							</div>
 						</div>
 						{#if !isMovie}
 							<EpisodeSwitch on:switchEpisode={search} />

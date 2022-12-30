@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-node": "^1.0.0",
 		"axios": "^1.2.0",
 		"fast-average-color": "^9.1.1",
 		"gsap": "^3.11.3",

@@ -127,7 +127,7 @@
 					{/each}
 				</ul>
 			</div>
-			<p class="text-xs text-light/70 m-1 ">*Not all suggestions can be played</p>
+			<p class="text-xs text-light/70 m-1 text-left ">*Not all suggestions can be played</p>
 		</div>
 	{/if}
 </div>
