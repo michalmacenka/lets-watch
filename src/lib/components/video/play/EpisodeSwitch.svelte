@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	import Button from '$lib/components/common/Button.svelte';
@@ -34,8 +33,8 @@
 
 	const getPreviousEpisode = () => {
 		if (
-			$videoInfo.seasons[$episodeInfo.numSeason - 1].episodes.indexOf($episodeInfo) === 0 &&
-			$videoInfo.seasons[$episodeInfo.numSeason - 1]
+			$videoInfo.seasons[$episodeInfo.numSeason - 2] &&
+			$videoInfo.seasons[$episodeInfo.numSeason - 1].episodes.indexOf($episodeInfo) === 0
 		) {
 			previousSeason = $episodeInfo.numSeason - 1;
 			previousEpisode =
