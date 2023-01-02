@@ -51,7 +51,7 @@
 		<div class="lg:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
 			{#if !isMovie}
 				<p class="text-main">
-					{$videoInfo.title}
+					{$videoInfo.originalTitle}
 				</p>
 			{/if}
 
@@ -63,7 +63,7 @@
 				{/if}
 
 				<h1>
-					{!isMovie ? $episodeInfo?.title : $videoInfo.title}
+					{!isMovie ? $episodeInfo?.title : $videoInfo.originalTitle}
 				</h1>
 			</div>
 		</div>

@@ -13,6 +13,7 @@ export interface SeasonInfo {
 
 export interface VideoInfo {
 	title: string;
+	originalTitle: string;
 	description: string;
 	duration: number;
 	genres: String[];

@@ -13,7 +13,7 @@
 </script>
 
 <section>
-	<h1 class="text-4xl font-bold text-white  ">{$videoInfo.title}</h1>
+	<h1 class="text-4xl font-bold text-white  ">{$videoInfo.originalTitle}</h1>
 	<div class="flex items-center gap-6 mt-0.5 font-medium   ">
 		<p>
 			{humanizeDuration($videoInfo.duration * 1000)}
