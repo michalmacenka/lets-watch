@@ -14,13 +14,16 @@
 	export let videoResolution: number[];
 
 	let player: any;
+	let playerElement: HTMLElement;
 
 	const initVideo = async (v: SV.VideoResult) => {
 		let videoData: SV.Video = await getVideo(v.video.path, v.video.id, v.video.site);
-
-		if (v.video.site === 2 && videoData.subtitles.length) {
-			videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
-			videoData.subtitles[0].label = 'Subtitles';
+		if (videoData.subtitles.length) {
+			if (v.video.site === 2) {
+				videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
+				videoData.subtitles[0].label = 'Subtitles';
+			} else {
+			}
 		}
 		player.source = {
 			type: 'video',
@@ -32,15 +35,14 @@
 	};
 
 	onMount(() => {
-		player = new Plyr('#player', { iconUrl: '/sprite.svg' });
-		console.log(player.quality);
+		player = new Plyr(playerElement, { iconUrl: '/sprite.svg' });
 	});
 	$: initVideo(videoResult);
 </script>
 
 <div class="my-5" in:blur={{ duration: 500 }}>
 	<!-- svelte-ignore a11y-media-has-caption -->
-	<video id="player" controls playsinline />
+	<video bind:this={playerElement} controls playsinline />
 </div>
 
 <style lang="scss">

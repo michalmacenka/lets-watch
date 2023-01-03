@@ -49,12 +49,9 @@
 {#await search() then v}
 	<div class="w-full mx-auto">
 		<div class="lg:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
-			{#if !isMovie}
-				<p class="text-main">
-					{$videoInfo.originalTitle}
-				</p>
-			{/if}
-
+			<a href="/{$videoInfo.idIMDB}" class="text-main">
+				{$videoInfo.originalTitle}
+			</a>
 			<div class="text-2xl font-bold text-white -mt-1 md:flex gap-6">
 				{#if !isMovie}
 					<h1>
@@ -74,7 +71,7 @@
 					<div class="sm:flex justify-between w-full items-start gap-3">
 						<div>
 							<h2 class="text-white font-medium">{selectedVideoResult.name}</h2>
-							<div class="text-white flex items-center gap-3">
+							<div class="text-light sm:flex max-sm:my-3 items-center gap-3">
 								{#if selectedVideoResult.hd && videoResolution[0]}
 									<span class="text-red-main flex items-center gap-1">
 										<i class="ri-hd-line -mt-1" />
@@ -86,7 +83,8 @@
 										<p />
 									</span>
 								{/if}
-								<p>{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
+								<p class="grow">{humanizeDuration(selectedVideoResult.duration * 1000)}</p>
+								<p>{selectedVideoResult.size}</p>
 							</div>
 						</div>
 						{#if !isMovie}

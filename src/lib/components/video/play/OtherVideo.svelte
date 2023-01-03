@@ -30,10 +30,10 @@
 		<p class="text-sm ">Now Playing</p>
 	{/if}
 	<h5 class="overflow-hidden {selected ? 'font-semibold text-main' : ''}">
-		{video.name}
+		{video.name} <sup class="text-middle">0{video.video.site}</sup>
 	</h5>
 
-	<div class="text-middle flex items-center justify-between gap-2">
+	<div class="text-light/40 flex items-center justify-between gap-2">
 		<span class="flex gap-2 items-center">
 			{#if video.hd}
 				<i class="ri-hd-line text-red-main -mt-0.5" />
