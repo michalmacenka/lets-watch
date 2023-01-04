@@ -42,14 +42,15 @@ const getVideo = async (path: string, id: string, site: number): Promise<SV.Vide
 	}
 };
 
-const getSubtitles = async (path: string): Promise<Blob> => {
+const getSubtitles = async (path: string, site: number): Promise<Blob> => {
 	try {
 		const { data } = await axios({
 			baseURL: import.meta.env.VITE_LETSWATCH_API_URL,
 			url: '/api/subtitles',
 			responseType: 'blob',
 			params: {
-				src: path.split('file/')[1]
+				src: site === 2 ? path.split('file/')[1] : path,
+				site
 			}
 		});
 		return data;

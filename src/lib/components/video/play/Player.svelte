@@ -16,27 +16,48 @@
 	let player: any;
 	let playerElement: HTMLElement;
 
+	const initSubtitles = async (src: string) => {
+		return new Promise(async (resolve) => {
+			resolve(URL.createObjectURL(await getSubtitles(src, videoResult.video.site)));
+		});
+	};
+
 	const initVideo = async (v: SV.VideoResult) => {
 		let videoData: SV.Video = await getVideo(v.video.path, v.video.id, v.video.site);
 		if (videoData.subtitles.length) {
 			if (v.video.site === 2) {
-				videoData.subtitles[0].src = await toWebVTT(await getSubtitles(videoData.subtitles[0].src));
+				videoData.subtitles[0].src = await toWebVTT(
+					await getSubtitles(videoData.subtitles[0].src, videoResult.video.site)
+				);
+
 				videoData.subtitles[0].label = 'Subtitles';
 			} else {
+				for (const i in videoData.subtitles) {
+					//@ts-ignore
+					videoData.subtitles[i].src = await initSubtitles(videoData.subtitles[i].src);
+				}
 			}
 		}
+
 		player.source = {
 			type: 'video',
 			title: $videoInfo.title,
 			sources: videoData.video,
 			tracks: videoData.subtitles
 		};
+		console.log(videoData.subtitles);
 		videoResolution = videoData.video.map(({ size }) => size);
 	};
 
 	onMount(() => {
-		player = new Plyr(playerElement, { iconUrl: '/sprite.svg' });
+		player = new Plyr(playerElement, {
+			iconUrl: '/sprite.svg',
+			blankVideo: '',
+			captions: { update: true, active: true }
+		});
+		player.on('captionsenabled', (e: any) => console.log(e.detail.plyr.captions));
 	});
+
 	$: initVideo(videoResult);
 </script>
 
