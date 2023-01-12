@@ -50,7 +50,7 @@
 
 <div class="my-5" in:blur={{ duration: 500 }}>
 	<!-- svelte-ignore a11y-media-has-caption -->
-	{#if playerSubtitles[0]}
+	{#if playerVideos[0]}
 		{#key playerVideos}
 			<Plyr
 				bind:player
