@@ -10,7 +10,7 @@
 	import Player from './Player.svelte';
 	import EpisodeSwitch from './EpisodeSwitch.svelte';
 
-	export let playType: string;
+	export let playTags: string[];
 
 	let isMovie: boolean;
 
@@ -28,15 +28,9 @@
 		if (!isMovie) {
 			$episodeInfo = $videoInfo?.seasons[+season - 1]?.episodes[+episode - 1];
 		}
-		playType =
-			{
-				all: '',
-				subtitles: 'tit',
-				czech: 'cz dab'
-			}[playType] || '';
 
 		let series = !isMovie ? `s${season}e${episode}` : '';
-		let term = `${$videoInfo.title} ${series} ${playType}`;
+		let term = `${$videoInfo.title} ${series} ${playTags.join(' ')}`;
 		data = await getVideoResults(term, $videoInfo.duration, isMovie);
 		selectedVideoResult = data.recommended;
 	};

@@ -6,7 +6,8 @@
 	import { page } from '$app/stores';
 
 	import type { PageData } from './$types';
-	import { videoInfo, episodeInfo } from '$core/store/writable';
+	import { videoInfo } from '$core/store/writable';
+	import { searchTags } from '$core/store/readable';
 	import Informations from '$lib/components/video/Informations.svelte';
 	import Buttons from '$lib/components/video/Buttons.svelte';
 	import Playbox from '$lib/components/video/Playbox.svelte';
@@ -21,7 +22,7 @@
 	let mainColor = '';
 	let isMainColorDark = false;
 	let imgData = '';
-	let playType = '';
+	let playTags: string[] = [];
 	let playPage = false;
 
 	const fetch = async (id: string) => {
@@ -39,9 +40,14 @@
 		}
 	};
 
-	const playSection = (type: string) => {
-		playType = type;
-		playPage = type === 'subtitles' || type === 'czech' || type === 'all';
+	const playSection = (tags: string | string[]) => {
+		tags = tags.toString().split('-') as string[];
+		playTags = tags;
+
+		if (tags.length > 0 && tags[0] === 'default') {
+			tags.shift();
+			playPage = tags.filter((tag) => !$searchTags.includes(tag)).length === 0;
+		} else playPage = false;
 	};
 
 	const getColor = () => {
@@ -60,7 +66,7 @@
 	};
 
 	$: fetch(data.idIMDB);
-	$: playSection($page.url.searchParams.get('type') || '');
+	$: playSection($page.url.searchParams.get('tags') || '');
 </script>
 
 <main class="w-full md:flex justify-between items-start ">
@@ -69,7 +75,7 @@
 			in:blur={{ duration: 500 }}
 			style="background-color: {mainColor};"
 			class="w-full h-full fixed {isMainColorDark
-				? 'opacity-50'
+				? 'opacity-60'
 				: 'opacity-30'}  top-0 left-0 -z-20 bg-gradient-to-r from-dark via-transparent "
 		/>
 	{/if}
@@ -86,7 +92,7 @@
 				src="data:image/png;base64,{imgData}"
 				alt="Video poster"
 				in:blur={{ duration: 500 }}
-				class=" object-cover w-full h-full object-[0%] "
+				class=" object-cover w-full h-full object-[30%] "
 				bind:this={img}
 				on:load={getColor}
 			/>
@@ -112,7 +118,7 @@
 				</div>
 			{/if}
 		{:else}
-			<Videos {playType} />
+			<Videos {playTags} />
 		{/if}
 	{:else if pageStatus === 0}
 		<div

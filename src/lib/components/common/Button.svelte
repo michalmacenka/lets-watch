@@ -41,7 +41,6 @@
 	button {
 		@apply font-medium
   flex gap-2
-  
   items-center
   duration-300  backdrop-filter backdrop-blur
   rounded-lg

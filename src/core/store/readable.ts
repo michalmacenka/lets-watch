@@ -12,4 +12,6 @@ const videoType: Readable<SS.VideoType[]> = readable([
 
 const allowedTypes: Readable<string[]> = readable(get(videoType).map(({ q }) => q));
 
-export { videoType, allowedTypes };
+const searchTags: Readable<string[]> = readable(['titulky', 'tit', 'dabing', 'cz']);
+
+export { videoType, allowedTypes, searchTags };
