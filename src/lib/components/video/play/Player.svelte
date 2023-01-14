@@ -1,6 +1,4 @@
 <script lang="ts">
-	//@ts-ignore
-	import { Plyr } from 'svelte-plyr';
 	import { default as toWebVTT } from 'srt-webvtt';
 
 	import { blur } from 'svelte/transition';
@@ -9,10 +7,10 @@
 	import type * as SV from '$core/schemas/video';
 	import { videoInfo } from '$core/store/writable';
 
+	import Plyr from './Plyr.svelte';
+
 	export let videoResult: SV.VideoResult;
 	export let videoResolution: number[];
-
-	let player: any;
 
 	let playerVideos: { src: string; size: number }[] = [];
 	let playerSubtitles: { src: string; label: string }[] = [];
@@ -52,23 +50,14 @@
 	<!-- svelte-ignore a11y-media-has-caption -->
 	{#if playerVideos[0]}
 		{#key playerVideos}
-			<Plyr
-				bind:player
-				options={{
-					iconUrl: '/sprite.svg',
-					blankVideo: '',
-					captions: { update: true, active: true, language: 'auto' }
-				}}
-			>
-				<video controls playsinline>
-					{#each playerVideos as { src, size }}
-						<source {src} type="video/mp4" {size} />
-					{/each}
+			<Plyr>
+				{#each playerVideos as { src, size }}
+					<source {src} type="video/mp4" {size} />
+				{/each}
 
-					{#each playerSubtitles as { src, label }}
-						<track kind="captions" {label} {src} />
-					{/each}
-				</video>
+				{#each playerSubtitles as { src, label }, i}
+					<track kind="captions" {label} {src} srclang={i} />
+				{/each}
 			</Plyr>
 		{/key}
 	{:else}
