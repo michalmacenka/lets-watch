@@ -4,7 +4,8 @@
 	import 'plyr/dist/plyr.css';
 
 	let playerElement: HTMLElement;
-	let player: Plyr;
+	export let player: Plyr;
+	export let isNextCtrl: boolean;
 
 	onMount(() => {
 		player = new Plyr(playerElement, {
@@ -13,10 +14,17 @@
 			blankVideo: '',
 			captions: { update: true, active: true, language: 'auto' }
 		});
+
+		player.on('ready', (e) => {
+			if (!isNextCtrl) return;
+
+			player.play();
+			player.fullscreen.enter();
+		});
 	});
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
-<video bind:this={playerElement} controls playsinline>
+<video bind:this={playerElement} controls playsinline on:ended>
 	<slot />
 </video>

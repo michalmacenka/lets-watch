@@ -60,7 +60,7 @@
 		</div>
 		<div class="w-full lg:grid grid-flow-col grid-cols-[5fr_3fr]  gap-8 ">
 			<div class="lg:sticky top-24">
-				<Player videoResult={selectedVideoResult} bind:videoResolution />
+				<Player videoResult={selectedVideoResult} on:nextEpisode={search} bind:videoResolution />
 				<div in:fly={{ x: -30, duration: 300 }}>
 					<div class="sm:flex justify-between w-full items-start gap-3">
 						<div>

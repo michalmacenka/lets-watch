@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	import Button from '$lib/components/common/Button.svelte';
-	import { videoInfo, episodeInfo } from '$core/store/writable';
+	import { videoInfo, episodeInfo, episodeSwitchData } from '$core/store/writable';
 
 	let nextEpisode: number;
 	let nextSeason: number;
@@ -64,6 +64,12 @@
 	$: if ($episodeInfo) {
 		getNextEpisode();
 		getPreviousEpisode();
+		$episodeSwitchData = {
+			nextEpisode,
+			nextSeason,
+			previousEpisode,
+			previousSeason
+		};
 	}
 </script>
 

@@ -10,4 +10,16 @@ const videoInfo: Writable<SI.VideoInfo> = writable();
 
 const episodeInfo: Writable<SI.EpisodeInfo> = writable();
 
-export { popularVideos, videoInfo, episodeInfo };
+const episodeSwitchData: Writable<{
+	nextEpisode: number;
+	nextSeason: number;
+	previousEpisode: number;
+	previousSeason: number;
+}> = writable({
+	nextEpisode: 2,
+	nextSeason: 1,
+	previousEpisode: 1,
+	previousSeason: 1
+});
+
+export { popularVideos, videoInfo, episodeInfo, episodeSwitchData };

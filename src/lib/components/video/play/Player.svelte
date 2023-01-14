@@ -1,19 +1,29 @@
 <script lang="ts">
 	import { default as toWebVTT } from 'srt-webvtt';
+	import plyr from 'plyr';
 
 	import { blur } from 'svelte/transition';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { createEventDispatcher } from 'svelte';
 
 	import { getVideo, getSubtitles } from '$core/services/video';
 	import type * as SV from '$core/schemas/video';
-	import { videoInfo } from '$core/store/writable';
+	import { videoInfo, episodeInfo, episodeSwitchData } from '$core/store/writable';
 
 	import Plyr from './Plyr.svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let videoResult: SV.VideoResult;
 	export let videoResolution: number[];
 
+	let player: plyr;
+
 	let playerVideos: { src: string; size: number }[] = [];
 	let playerSubtitles: { src: string; label: string }[] = [];
+
+	let isNextCtrl = false;
 
 	const initSubtitles = async (src: string) => {
 		return new Promise(async (resolve) => {
@@ -43,6 +53,18 @@
 		videoResolution = videoData.video.map(({ size }) => size);
 	};
 
+	const nextEpisode = () => {
+		if (!$episodeInfo) return;
+		// player.fullscreen.exit();
+		$page.url.searchParams.set('s', $episodeSwitchData.nextSeason.toString());
+		$page.url.searchParams.set('e', $episodeSwitchData.nextEpisode.toString());
+		dispatch('nextEpisode');
+		goto(`?${$page.url.searchParams.toString()}`, {
+			noScroll: true
+		});
+		isNextCtrl = true;
+	};
+
 	$: initVideo(videoResult);
 </script>
 
@@ -50,7 +72,7 @@
 	<!-- svelte-ignore a11y-media-has-caption -->
 	{#if playerVideos[0]}
 		{#key playerVideos}
-			<Plyr>
+			<Plyr on:ended={nextEpisode} bind:player {isNextCtrl}>
 				{#each playerVideos as { src, size }}
 					<source {src} type="video/mp4" {size} />
 				{/each}
