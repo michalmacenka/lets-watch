@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { default as toWebVTT } from 'srt-webvtt';
-	import plyr from 'plyr';
+	import type plyr from 'plyr';
 
 	import { blur } from 'svelte/transition';
 	import { page } from '$app/stores';
@@ -55,7 +55,7 @@
 
 	const nextEpisode = () => {
 		if (!$episodeInfo) return;
-		// player.fullscreen.exit();
+		player.fullscreen.exit();
 		$page.url.searchParams.set('s', $episodeSwitchData.nextSeason.toString());
 		$page.url.searchParams.set('e', $episodeSwitchData.nextEpisode.toString());
 		dispatch('nextEpisode');
@@ -78,7 +78,7 @@
 				{/each}
 
 				{#each playerSubtitles as { src, label }, i}
-					<track kind="captions" {label} {src} srclang={i} />
+					<track kind="captions" {label} {src} srclang={i.toString()} />
 				{/each}
 			</Plyr>
 		{/key}
