@@ -9,6 +9,7 @@
 	import OtherVideo from './OtherVideo.svelte';
 	import Player from './Player.svelte';
 	import EpisodeSwitch from './EpisodeSwitch.svelte';
+	import DownloadBox from './DownloadBox.svelte';
 
 	export let playTags: string[];
 
@@ -42,7 +43,7 @@
 
 {#await search() then v}
 	<div class="w-full mx-auto">
-		<div class="lg:sticky top-14" in:fly={{ x: -30, duration: 300 }}>
+		<div class="lg:sticky top-32" in:fly={{ x: -30, duration: 300 }}>
 			<a href="/{$videoInfo.idIMDB}" class="text-main">
 				{$videoInfo.originalTitle}
 			</a>
@@ -59,7 +60,7 @@
 			</div>
 		</div>
 		<div class="w-full lg:grid grid-flow-col grid-cols-[5fr_3fr]  gap-8 ">
-			<div class="lg:sticky top-24">
+			<div class="lg:sticky top-5">
 				<Player videoResult={selectedVideoResult} on:nextEpisode={search} bind:videoResolution />
 				<div in:fly={{ x: -30, duration: 300 }}>
 					<div class="sm:flex justify-between w-full items-start gap-3">
@@ -85,9 +86,10 @@
 							<EpisodeSwitch on:switchEpisode={search} />
 						{/if}
 					</div>
-					<p class="mt-3 text-light italic col-span-2">
+					<p class="mt-3 mb-6 text-light italic col-span-2">
 						{!isMovie ? $episodeInfo?.plot : $videoInfo.description}
 					</p>
+					<DownloadBox />
 				</div>
 			</div>
 			<ul class="row-span-2 flex flex-col gap-3 max-h-full mt-14 lg:mt-5">

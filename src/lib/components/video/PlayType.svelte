@@ -61,7 +61,7 @@
 		&:hover {
 			@apply bg-main/5;
 			rect {
-				stroke-dasharray: 35, 374;
+				stroke-dasharray: 35, 340 + random(50);
 				stroke-dashoffset: 48;
 				transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
 			}

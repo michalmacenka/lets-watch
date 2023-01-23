@@ -9,7 +9,7 @@
 
 	import { getVideo, getSubtitles } from '$core/services/video';
 	import type * as SV from '$core/schemas/video';
-	import { videoInfo, episodeInfo, episodeSwitchData } from '$core/store/writable';
+	import { videoLinks, episodeInfo, episodeSwitchData } from '$core/store/writable';
 
 	import Plyr from './Plyr.svelte';
 
@@ -51,6 +51,8 @@
 		playerVideos = videoData.video;
 		playerSubtitles = videoData.subtitles;
 		videoResolution = videoData.video.map(({ size }) => size);
+
+		$videoLinks = videoData;
 	};
 
 	const nextEpisode = () => {
@@ -70,16 +72,23 @@
 
 <div class="my-5" in:blur={{ duration: 500 }}>
 	<!-- svelte-ignore a11y-media-has-caption -->
-	{#if playerVideos[0]}
-		{#key playerVideos}
+	{#if $videoLinks.video[0]}
+		{#key $videoLinks.video}
 			<Plyr on:ended={nextEpisode} bind:player {isNextCtrl}>
-				{#each playerVideos as { src, size }}
+				{#each $videoLinks.video as { src, size }}
 					<source {src} type="video/mp4" {size} />
 				{/each}
 
-				{#each playerSubtitles as { src, label }, i}
-					<track kind="captions" {label} {src} srclang={i.toString()} />
-				{/each}
+				{#key $videoLinks.subtitles}
+					{#each $videoLinks.subtitles as { src, label }, i}
+						<track
+							kind="captions"
+							label={label.length > 23 ? label.slice(0, 20) + '...' : label}
+							{src}
+							srclang={i.toString()}
+						/>
+					{/each}
+				{/key}
 			</Plyr>
 		{/key}
 	{:else}

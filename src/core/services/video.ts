@@ -11,7 +11,7 @@ const getVideoResults = async (
 			baseURL: import.meta.env.VITE_LETSWATCH_API_URL,
 			url: '/api/search/',
 			params: {
-				term,
+				term: term.trim(),
 				duration,
 				movie
 			}

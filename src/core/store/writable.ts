@@ -3,6 +3,7 @@ import type { Writable } from 'svelte/store';
 
 import type * as SP from '$core/schemas/popularVideos';
 import type * as SI from '$core/schemas/videoInformations';
+import type * as SV from '$core/schemas/video';
 
 const popularVideos: Writable<SP.Video[]> = writable([]);
 
@@ -22,4 +23,9 @@ const episodeSwitchData: Writable<{
 	previousSeason: 1
 });
 
-export { popularVideos, videoInfo, episodeInfo, episodeSwitchData };
+const videoLinks: Writable<SV.Video> = writable({
+	video: [],
+	subtitles: []
+});
+
+export { popularVideos, videoInfo, episodeInfo, episodeSwitchData, videoLinks };
