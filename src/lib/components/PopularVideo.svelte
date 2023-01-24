@@ -25,7 +25,7 @@
 			<img
 				src={video.urlPoster}
 				alt="{video.title} poster"
-				class=" w-full rounded-md object-cover h-72   "
+				class=" w-full rounded-md object-cover h-96 sm:h-72   "
 			/>
 		</Lazy>
 

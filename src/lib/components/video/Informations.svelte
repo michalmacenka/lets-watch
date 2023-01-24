@@ -14,7 +14,7 @@
 
 <section>
 	<h1 class="text-4xl font-bold text-white  ">{$videoInfo.originalTitle}</h1>
-	<div class="flex items-center gap-6 mt-0.5 font-medium   ">
+	<div class="sm:flex  items-center gap-6 mt-0.5 font-medium   ">
 		<p>
 			{humanizeDuration($videoInfo.duration * 1000)}
 		</p>
@@ -41,7 +41,7 @@
 	</div>
 	<p class="w-full max-w-xl italic text-light/50 my-5">{$videoInfo.description}</p>
 
-	<ul class="flex gap-2 ">
+	<ul class="flex gap-2 items-start flex-wrap">
 		<li class=" {type.bg}  bg-opacity-50  backdrop-blur  capitalize rounded  py-1 px-3 mr-6 ">
 			{type.title}
 		</li>

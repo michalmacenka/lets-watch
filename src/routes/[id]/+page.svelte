@@ -18,6 +18,7 @@
 
 	let pageStatus = 0;
 	let playBox = false;
+	let playBoxElement: HTMLElement;
 	let img: HTMLImageElement;
 	let mainColor = '';
 	let isMainColorDark = false;
@@ -106,12 +107,21 @@
 				transition:fly={{ x: -30, duration: 300 }}
 			>
 				<Informations />
-				<Buttons on:click={() => (playBox = !playBox)} />
+				<Buttons
+					on:click={() => {
+						playBox = !playBox;
+						setTimeout(() => {
+							playBoxElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+						}, 500);
+					}}
+				/>
 			</div>
+
 			{#if playBox}
 				<div
 					class="flex flex-col w-full md:place-items-end max-md:mt-24"
 					transition:fly={{ x: 30, duration: 300 }}
+					bind:this={playBoxElement}
 				>
 					<h3 class="text-4xl font-bold text-white mb-4">Find Video</h3>
 					<Playbox />
