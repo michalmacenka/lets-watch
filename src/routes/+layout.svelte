@@ -14,18 +14,24 @@
 </script>
 
 <div class="font-body text-white sm:px-16 px-6 sm:py-8 py-4 w-full">
-	<div class="absolute top-0 max-sm:-translate-x-1/2 left-1/2 sm:left-0 m-3">
+	<div class="absolute top-0 left-0  m-3">
 		<a
 			href="https://github.com/michalmacenka/lets-watch"
 			target="noreferrer"
-			class="text-light hover:text-main transition-all text-left flex gap-2 items-center "
+			class="text-light hover:text-main transition-all text-left flex gap-2 items-center whitespace-nowrap "
 		>
 			<i class="ri-github-fill scale-125" />
-			<h2 class="text-xs flex items-center ">
-				Dev. by <img src="/mm.png" alt="Michal Mačenka logo" class="h-6 ml-2 mr-1" /> Michal Mačenka
+			<h2 class="text-xs sm:flex items-center ">
+				Dev. by <span class="flex items-center">
+					<img src="/mm.png" alt="Michal Mačenka logo" class="h-6 sm:ml-2 mr-1" /> Michal Mačenka</span
+				>
 			</h2>
 		</a>
 	</div>
+	<a
+		href="/dmca"
+		class="text-light hover:text-main transition-all text-right absolute top-0 right-0 m-3">DMCA</a
+	>
 	<header class="flex flex-col items-center text-center max-sm:mt-16  w-full gap-5 mb-16 ">
 		<a href="/" class="z-50 relative">
 			<h3 class="absolute -top-3 -left-1 text-sm text-main font-semibold">BETA</h3>
