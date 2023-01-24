@@ -6,7 +6,7 @@ Let's Watch is a free website for watching your favourite movies or series. All 
 
 ## ⚙️ How it works?
 
-Website is a dynamic search web application. On the main page are videos which are most relevant for these days. Searching video is based on the IMDB ID. Everything works thanks to the lets-watch API which is currently private.
+Website is a dynamic search web application. On the main page are videos which are most relevant for these days. Searching video is based on the IMDB ID. Everything works thanks to the lets-watch API. **Although API is curretly private, NONE of videos are stored on the lets watch servers.**
 
 ## 📜 License
 

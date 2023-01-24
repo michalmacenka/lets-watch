@@ -16,12 +16,14 @@
 <div class="font-body text-white sm:px-16 px-6 sm:py-8 py-4 w-full">
 	<div class="absolute top-0 max-sm:-translate-x-1/2 left-1/2 sm:left-0 m-3">
 		<a
-			href="https://github.com/michalmacenka"
+			href="https://github.com/michalmacenka/lets-watch"
 			target="noreferrer"
 			class="text-light hover:text-main transition-all text-left flex gap-2 items-center "
 		>
-			<img src="/mm.png" alt="Michal Mačenka logo" class="h-12" />
-			<h2 class="text-xs  ">Developed by <br /> Michal Mačenka</h2>
+			<i class="ri-github-fill scale-125" />
+			<h2 class="text-xs flex items-center ">
+				Dev. by <img src="/mm.png" alt="Michal Mačenka logo" class="h-6 ml-2 mr-1" /> Michal Mačenka
+			</h2>
 		</a>
 	</div>
 	<header class="flex flex-col items-center text-center max-sm:mt-16  w-full gap-5 mb-16 ">
