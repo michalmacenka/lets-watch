@@ -31,8 +31,8 @@
 		</a>
 	</div>
 	<a
-		href="/dmca"
-		class="text-light hover:text-main transition-all text-right absolute top-0 right-0 m-3">DMCA</a
+		href="/terms"
+		class="text-light hover:text-main transition-all text-right absolute top-0 right-0 m-3">Terms</a
 	>
 	<header class="flex flex-col items-center text-center max-sm:mt-16  w-full gap-5 mb-16 ">
 		<a href="/" class="z-50 relative">
