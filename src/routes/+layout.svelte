@@ -8,11 +8,13 @@
 	import Searchbar from '$lib/components/searchbar/Main.svelte';
 	import shuffleArray from '$core/helpers/shuffleArray';
 	import { popularVideos } from '$core/store/writable';
+	import Cookies from '$lib/components/common/Cookies.svelte';
 
 	export let data: PageData;
 	$popularVideos = shuffleArray(data.popularVideos);
 </script>
 
+<Cookies />
 <div class="font-body text-white sm:px-16 px-6 sm:py-8 py-4 w-full">
 	<div class="absolute top-0 left-0  m-3">
 		<a
