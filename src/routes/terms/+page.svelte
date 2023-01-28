@@ -127,10 +127,6 @@
 		</li>
 	</ul>
 	<p>
-		You can control the cookie’s we use when accessing our website. You can also manage and control
-		other cookies through the settings on your web browser.
-	</p>
-	<p>
 		To opt out of being tracked by Google Analytics across all websites, please access the following
 		link: <a href="http://tools.google.com/dlpage/gaoptout" target="_blank" rel=" noreferrer"
 			>http://tools.google.com/dlpage/gaoptout</a

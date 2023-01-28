@@ -31,8 +31,16 @@
 	});
 </script>
 
+<!-- TODO: responsive subtitles -->
+
 <!-- svelte-ignore a11y-media-has-caption -->
 
 <video bind:this={playerElement} controls playsinline on:ended>
 	<slot />
 </video>
+
+<style>
+	::cue {
+		font-size: 200%;
+	}
+</style>
